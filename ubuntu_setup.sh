@@ -177,7 +177,7 @@ echo "Installing the SciPy Stack"
 aptitude install libzmq-dev libzmq1
 aptitude install python-tables mayavi2
 pip install cython
-pip install numpy scipy nose pandas theano
+pip install numpy scipy nose pandas theano sympy
 aptitude install libzmq-dev libzmq1
 pip install ipython[notebook]
 aptitude build-dep python-matplotlib

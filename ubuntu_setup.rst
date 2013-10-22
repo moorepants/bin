@@ -356,7 +356,7 @@ Install these from the package manager::
 Install from source::
 
    $ sudo pip install cython # theano and pandas use to build
-   $ sudo pip install numpy scipy nose pandas theano
+   $ sudo pip install numpy scipy nose pandas theano sympy
 
 IPython needs the ZMQ libs::
 
