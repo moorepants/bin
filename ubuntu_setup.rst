@@ -96,7 +96,7 @@ Software Development
 
 ::
 
-   $ sudo aptitude install build-essential gfortran python-dev cmake cmake-curses-gui doxygen
+   $ sudo aptitude install build-essential gfortran python-dev cmake cmake-curses-gui doxygen valgrind
 
 Install pip::
 
@@ -244,7 +244,7 @@ Document Processing
 
 Get a LaTeX distribution and biblatex::
 
-   $ sudo aptitude install texlive texlive-bibtex-extra
+   $ sudo aptitude install texlive texlive-bibtex-extra biber
 
 Pandoc::
 
@@ -633,7 +633,12 @@ OpenSim
 
 Type 'c' and add::
 
-   SimTK_INSTALL_DIR=/usr/local
+   SimTK_INSTALL_DIR=/usr/local/SimTK
+
+   CMAKE_INSTALL_PREFIX=/usr/local/OpenSim
+
+   Enable python wrapping. The default is to build it with Python3.3 so you
+   have to manually set it for Python 2.7 (haven't done this yet).
 
 Type 'c' and then 'g'.
 
@@ -646,6 +651,17 @@ These tests failed on the trunk::
    32/51 Test #32: testOptimizationExampleRuns ..................***Timeout 1500.03 sec
          Start 33: testOptimizationExample
    33/51 Test #33: testOptimizationExample ......................***Failed    0.28 sec
+
+Install anyway::
+
+   $ sudo make install
+   $ cd /usr/local/OpenSim/sdk/python
+   $ sudo python setup.py install
+
+   $ cd ~
+   $ export LD_LIBRARY_PATH=/usr/local/SimTK/lib:/usr/local/OpenSim/lib
+   $ python3
+   >>> import opensim
 
 Old
 ===
