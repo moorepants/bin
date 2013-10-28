@@ -12,9 +12,13 @@ this script:
  - generates a new bib file with only the entries that are cited in the tex
  file
 
- You use it like this:
+You use it like this:
 
     python generate_sub_bib.py paper.tex main.bib sub_bib.bib
+
+There is one basic test which can be run like:
+
+    python generate_sub_bib.py null null null --test
 
  It requires the pybtex program:
 
@@ -26,6 +30,7 @@ this script:
 import re
 import os
 import time
+import StringIO
 
 # external libraries
 from pybtex.database import BibliographyData
@@ -73,6 +78,9 @@ class SubBib(object):
             if ',' in citation:
                 citations += [c.strip() for c in citation.strip().split(',')]
                 citations.remove(citation)
+        citations = [c.strip() for c in citations]
+        while '' in citations:
+            citations.remove('')
         self.unique_bibtex_keys = list(set(citations))
 
     def load_main_file(self):
@@ -90,21 +98,99 @@ class SubBib(object):
 
 
 def test():
-    # TODO : create test main bib file
+    main_bib_text = \
+r"""\
+@ARTICLE{Moses1986,
+   author = {Moses Moses},
+   title = {The Gnats and Gnus Document Preparation System},
+   journal = {The Bible},
+   year = 1986,
+}
+
+@ARTICLE{Moses1986a,
+   author = {Moses Moses},
+   title = {Document Preparation System},
+   journal = {The Bible},
+   year = 1986,
+}
+
+@ARTICLE{Judiah1986,
+   author = {Moses Moses},
+   title = {Document Preparation System},
+   journal = {The Bible},
+   year = 1986,
+}
+
+@ARTICLE{Peter1876,
+   author = {Peter Lamb},
+   title = {Document Preparation System},
+   journal = {The Bible},
+   year = 1876,
+}
+
+@ARTICLE{Dillan1987,
+   author = {Bob Dillan},
+   title = {Document Preparation System},
+   journal = {The Bible},
+   year = 1987,
+}
+
+@ARTICLE{Dillan1987a,
+   author = {Bob Dillan},
+   title = {On the road again},
+   journal = {The Bible},
+   year = 1987,
+}
+
+@ARTICLE{Ramone1988,
+   author = {Joey Ramone},
+   title = {On the road again},
+   journal = {The Bible},
+   year = 1987,
+}
+
+@ARTICLE{Harrison1967,
+   author = {George Harrison},
+   title = {Blasphemous},
+   journal = {The Bible},
+   year = 1987,
+}"""
+
     example_text = \
-r"""We are talking about \cite{Moses2000} and then
-\cite{Judiah2003,Lucifer1967} both went crazy. Don't cite this one
+r"""We are talking about \cite{Moses1986} and then
+\cite{Moses1986a,Judiah1986} both went crazy. Don't cite this one
 \nocite{Peter1876}.
 
 Here is a funny list:
-\nocite{Dillan1987,
+\nocite{
+  Dillan1987
+}
+\nocite{Dillan1987a,
   Ramone1988,
   Harrison1967}
-\cite{Dillan1987,
+\cite{
+  Dillan1987a,
   Ramone1988,
-  Harrison1967}"""
-    # TODO : Run command to verify that it works.
+  Harrison1967,
+}"""
 
+    with open('test_main.bib', 'w') as f:
+        f.write(main_bib_text)
+
+    with open('example_tex_file.tex', 'w') as f:
+        f.write(example_text)
+
+    creator = SubBib('example_tex_file.tex', 'test_main.bib',
+                     'test_sub_bib.bib')
+
+    expected_unique_keys = ['Moses1986', 'Moses1986a', 'Judiah1986',
+                            'Peter1876', 'Dillan1987', 'Dillan1987a',
+                            'Ramone1988', 'Harrison1967']
+    assert sorted(expected_unique_keys) == sorted(creator.unique_bibtex_keys)
+
+    os.remove('test_main.bib')
+    os.remove('example_tex_file.tex')
+    os.remove('test_sub_bib.bib')
 
 if __name__ == "__main__":
 
@@ -127,6 +213,12 @@ if __name__ == "__main__":
     parser.add_argument('--force', action='store_true',
         help="Add to force a rebuild of the sub bib.", default=False)
 
+    parser.add_argument('--test', action='store_true',
+        help="Ignores arguments and runs the test.", default=False)
+
     args = parser.parse_args()
 
-    creator = SubBib(args.paper, args.mainbib, args.subbib, force=args.force)
+    if args.test is True:
+        test()
+    else:
+        creator = SubBib(args.paper, args.mainbib, args.subbib, force=args.force)
