@@ -24,6 +24,8 @@ this script:
 
 # standard library
 import re
+import os
+import time
 
 # external libraries
 from pybtex.database import BibliographyData
@@ -33,23 +35,43 @@ from pybtex.database.output import bibtex as output_bibtex
 
 class SubBib(object):
 
-    def __init__(self, path_to_tex, path_to_main, path_to_sub):
+    def __init__(self, path_to_tex, path_to_main, path_to_sub, force=False):
         self.path_to_tex = path_to_tex
         self.path_to_main = path_to_main
         self.path_to_sub = path_to_sub
 
-        self.extract_unique_bibkeys()
-        self.load_main_file()
-        self.build_new_file()
+        if self.rebuild_is_needed() or force is True:
+            self.extract_unique_bibkeys()
+            self.load_main_file()
+            self.build_new_file()
+        else:
+            print("{} is already up-to-date, add --force to force a rebuild".format(self.path_to_sub))
+
+    def rebuild_is_needed(self):
+        try:
+            open(self.path_to_sub, 'r')
+        except IOError:
+            return True
+        else:
+            last_time_main_modified = \
+                time.ctime(os.path.getmtime(self.path_to_main))
+
+            last_time_sub_modified = \
+                time.ctime(os.path.getmtime(self.path_to_sub))
+
+            if last_time_main_modified > last_time_sub_modified:
+                return True
+            else:
+                return False
 
     def extract_unique_bibkeys(self):
         with open(self.path_to_tex, 'r') as f:
             tex_text = f.read()
 
-        citations = re.findall(r'\\cite\{(.*?)\}', tex_text)
+        citations = re.findall(r'\\n?o?cite\{(.*?)\}', tex_text, re.DOTALL)
         for citation in citations[:]:
             if ',' in citation:
-                citations += citation.split(',')
+                citations += [c.strip() for c in citation.strip().split(',')]
                 citations.remove(citation)
         self.unique_bibtex_keys = list(set(citations))
 
@@ -65,6 +87,23 @@ class SubBib(object):
         database = BibliographyData(entries=new_entries)
         writer = output_bibtex.Writer()
         writer.write_file(database, self.path_to_sub)
+
+
+def test():
+    # TODO : create test main bib file
+    example_text = \
+r"""We are talking about \cite{Moses2000} and then
+\cite{Judiah2003,Lucifer1967} both went crazy. Don't cite this one
+\nocite{Peter1876}.
+
+Here is a funny list:
+\nocite{Dillan1987,
+  Ramone1988,
+  Harrison1967}
+\cite{Dillan1987,
+  Ramone1988,
+  Harrison1967}"""
+    # TODO : Run command to verify that it works.
 
 
 if __name__ == "__main__":
@@ -85,6 +124,9 @@ if __name__ == "__main__":
     parser.add_argument('subbib', type=str,
         help="The new subfile.")
 
+    parser.add_argument('--force', action='store_true',
+        help="Add to force a rebuild of the sub bib.", default=False)
+
     args = parser.parse_args()
 
-    creator = SubBib(args.paper, args.mainbib, args.subbib)
+    creator = SubBib(args.paper, args.mainbib, args.subbib, force=args.force)
