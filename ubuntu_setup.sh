@@ -1,9 +1,14 @@
 #!/usr/bin/env bash
 
 # This script sets up a base Ubuntu installation for a new machine with all the
-# pacakges that I commonly use. It attempts to automate the installation
+# packages that I commonly use. It attempts to automate the installation
 # instructions included in ubuntu_setup.rst.
 
+# TODO : I need to have this setup so that only the aptitude and pip commands
+# (and a few others) are run by root (sudo) and the rest should be run by the
+# user who runs the command.
+
+# TODO : This is not working...
 alias aptitude="aptitude -q=2 -y"
 
 # Get aptitude and update/upgrade
@@ -17,8 +22,11 @@ echo "Version Control"
 aptitude install git gitk subversion mercurial bzr subversion
 git config --global user.email "moorepants@gmail.com"
 git config --global user.name "Jason K. Moore"
-chmod +x /usr/share/doc/git/contrib/subtree/git-subtree.sh
-ln -s /usr/share/doc/git/contrib/subtree/git-subtree.sh /usr/lib/git-core/git-subtree
+
+# This was needed for Ubuntu 13.04, but doesn't seem to be needed for Ubuntu
+# 13.10
+#chmod +x /usr/share/doc/git/contrib/subtree/git-subtree.sh
+#ln -s /usr/share/doc/git/contrib/subtree/git-subtree.sh /usr/lib/git-core/git-subtree
 
 # Generate an SSH key if one doesn't already exist
 TITLE=$( hostname )
@@ -28,8 +36,16 @@ else
 	PASSPHRASE=$( cat passphrase.txt )
 fi
 if [ ! -f $HOME/.ssh/id_rsa.pub ]; then
+	mkdir -p $HOME/.ssh
 	ssh-keygen -t rsa -C "moorepants@gmail.com" -N $PASSPHRASE -f $HOME/.ssh/id_rsa
 fi
+chown moorepants:moorepants $HOME/.ssh
+chown moorepants:moorepants $HOME/.ssh/id_rsa
+chown moorepants:moorepants $HOME/.ssh/id_rsa.pub
+chmod 700 $HOME/.ssh
+chmod 600 $HOME/.ssh/id_rsa
+chmod 600 $HOME/.ssh/id_rsa.pub
+
 # Upload the public ssh key to Github using their API.
 # TODO : What if key already exists?
 KEY=$( cat $HOME/.ssh/id_rsa.pub )
@@ -44,11 +60,11 @@ curl -s -d "$JSON" "https://api.github.com/user/keys?access_token=$TOKEN"
 
 # Scripts
 echo "Scripts"
-git clone git@github.com:moorepants/bin.git $HOME/bin
+sudo -u moorepants git clone git@github.com:moorepants/bin.git $HOME/bin
 
 # Dot Files
 echo "Dot Files"
-git clone git@github.com:moorepants/dotfiles.git $HOME/src/dotfiles
+sudo -u moorepants git clone git@github.com:moorepants/dotfiles.git $HOME/src/dotfiles
 if [ -f $HOME/.bashrc ]; then
 	rm $HOME/.bashrc
 fi
@@ -68,15 +84,15 @@ ln -s $HOME/src/dotfiles/rst.vim $HOME/.vim/after/ftplugin/rst.vim
 echo "Installing Vim"
 aptitude install vim-gtk exuberant-ctags
 git config --global core.editor "vim"
-git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
+sudo -u moorepants git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
 
 # Software Development
 echo "Software Development"
-aptitude install build-essential gfortran python-dev cmake cmake-curses-gui
+aptitude install build-essential gfortran python-dev cmake cmake-curses-gui doxygen
 aptitude install python-pip
 pip install -U pip # upgrade pip
 pip install virtualenv virtualenvwrapper
-mkdir $HOME/envs
+sudo -u moorepants mkdir $HOME/envs
 
 # General
 echo "General"
@@ -93,15 +109,16 @@ aptitude install hal
 echo "Graphics"
 aptitude install gimp jhead imagemagick
 aptitude install inkscape pstoedit pdf2svg
-mkdir -p $HOME/src
-hg clone https://bitbucket.org/pv/textext $HOME/src/textext
-cp $HOME/src/textext/textext.py $HOME/.config/inkscape/extensions/
-cp $HOME/src/textext/textext.inx $HOME/.confing/inkscape/extensions/
+sudo -u moorepants mkdir -p $HOME/src
+sudo -u moorepants hg clone https://bitbucket.org/pv/textext $HOME/src/textext
+sudo -u moorepants mkdir -p $HOME/.config/inkscape/extensions
+sudo -u moorepants cp $HOME/src/textext/textext.py $HOME/.config/inkscape/extensions/
+sudo -u moorepants cp $HOME/src/textext/textext.inx $HOME/.confing/inkscape/extensions/
 aptitude install libjpeg62-dev zlib1g-dev libfreetype6-dev liblcms1-dev
 aptitude install libexiv2-dev libtool libgirepository1.0-dev m4
-git clone git://git.yorba.org/gexiv2 $HOME/src/gexiv2
-$HOME/src/gexiv2/configure --enable-introspection
-make -C $HOME/src/gexiv2
+sudo -u moorepants git clone git://git.yorba.org/gexiv2 $HOME/src/gexiv2
+sudo -u moorepants $HOME/src/gexiv2/configure --enable-introspection
+sudo -u moorepants make -C $HOME/src/gexiv2
 make install -C $HOME/src/gexiv2
 
 # Communication
@@ -120,8 +137,10 @@ echo "Reference Management"
 aptitude install jabref
 wget http://download.zotero.org/standalone/4.0.9/Zotero-4.0.9_linux-x86_64.tar.bz2 -O $HOME/Downloads/Zotero-4.0.9_linux-x86_64.tar.bz2
 tar -jxvf $HOME/Downloads/Zotero-4.0.9_linux-x86_64.tar.bz2
+# this unpacked into the current directory
 mkdir /opt/zotero
-cp -r $HOME/Downloads/Zotero_linux-x86_64/ /opt/zotero
+cp -r Zotero_linux-x86_64/ /opt/zotero
+rm -r Zotero_linux-x86_64
 
 STRING=$( cat <<EOF
 [Desktop Entry]
@@ -158,7 +177,7 @@ echo "Installing the SciPy Stack"
 aptitude install libzmq-dev libzmq1
 aptitude install python-tables mayavi2
 pip install cython
-pip install numpy scipy nose pandas theano
+pip install numpy scipy nose pandas theano sympy
 aptitude install libzmq-dev libzmq1
 pip install ipython[notebook]
 aptitude build-dep python-matplotlib
@@ -169,6 +188,7 @@ python -c 'import matplotlib; matplotlib.test()'
 
 # R
 echo "Installing R"
+# this requires soem dependency resolutions for some reason, maybe i'm installing the wrong package
 aptitude install r-base
 
 # Adobe Reader

@@ -48,7 +48,7 @@ Configure Git::
    $ git config --global user.email "moorepants@gmail.com"
    $ git config --global user.name "Jason K. Moore"
 
-Make the git subtree command work::
+Make the git subtree command work (only needed in Ubuntu 13.04, not 13.10)::
 
    $ sudo chmod +x /usr/share/doc/git/contrib/subtree/git-subtree.sh
    $ sudo ln -s /usr/share/doc/git/contrib/subtree/git-subtree.sh /usr/lib/git-core/git-subtree
@@ -134,6 +134,10 @@ Add the hamster indicator to startup applications (found in dash)::
    name= "Hamster Indicator"
    command= "hamster-indicator"
 
+Link to the hmaster database::
+
+   ln -s ~/Dropbox/hamster.db ~/.local/share/hamster-applet/hamster.db`
+
 Install rememberthemilk
 
 http://www.rememberthemilk.com/services/gmail/addon/
@@ -178,6 +182,8 @@ Installing hal is supposed to let me watch Flash videos with DRM, but I can't
 get a purchased Youtube movie to work::
 
    $ sudo aptitude install hal
+
+Wine::
 
    $ sudo aptitude install wine
 
@@ -279,6 +285,8 @@ Install Zotero::
    StartupNotify=true
    Categories=Office
 
+Also install the firefox extension and link it to the standalone.
+
 Add .bashrc alias::
 
    alias zotero=/opt/zotero/zotero
@@ -348,7 +356,7 @@ Install these from the package manager::
 Install from source::
 
    $ sudo pip install cython # theano and pandas use to build
-   $ sudo pip install numpy scipy nose pandas theano
+   $ sudo pip install numpy scipy nose pandas theano sympy
 
 IPython needs the ZMQ libs::
 
