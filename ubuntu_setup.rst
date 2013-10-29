@@ -186,7 +186,7 @@ Graphics
 
 ::
 
-   $ sudo aptitude install gimp jhead imagemagick
+   $ sudo aptitude install gimp jhead imagemagick shutter
 
 Get Inkscape and some helper programs for LaTeX::
 
