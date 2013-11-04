@@ -57,6 +57,12 @@ Generate a ssh key::
 
    $ ssh-keygen -t rsa -C "moorepants@gmail.com"
 
+Hub::
+
+   $ git clone git@github.com:github/hub.git ~/src/hub
+   $ cd ~/src/hub
+   $ sudo rake1.9.1 install
+
 Dot Files
 =========
 
