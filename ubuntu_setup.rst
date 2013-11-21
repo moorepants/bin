@@ -457,6 +457,11 @@ Put this in bashrc because I rarely use the gui::
 
    alias matlab='matlab -nodesktop -nosplash'
 
+Octave
+======
+
+sudo aptitude install octave
+
 Plone
 =====
 
