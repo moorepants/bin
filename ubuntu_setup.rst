@@ -102,7 +102,7 @@ Software Development
 
 ::
 
-   $ sudo aptitude install build-essential gfortran python-dev cmake cmake-curses-gui doxygen valgrind
+   $ sudo aptitude install build-essential gfortran python-dev cmake cmake-curses-gui doxygen valgrind swig
 
 Install pip::
 
@@ -275,8 +275,8 @@ JabRef::
 
 Install Zotero::
 
-   wget http://download.zotero.org/standalone/4.0.9/Zotero-4.0.9_linux-x86_64.tar.bz2
-   tar -jxvf Zotero-4.0.9_linux-x86_64.tar.bz2
+   wget http://download.zotero.org/standalone/4.0.16/Zotero-4.0.16_linux-x86_64.tar.bz2
+   tar -jxvf Zotero-4.0.16_linux-x86_64.tar.bz2
    sudo cp -r Zotero_linux-x86_64/ /opt/zotero
 
    vim ~/.local/share/applications/zotero.desktop
@@ -460,7 +460,44 @@ Put this in bashrc because I rarely use the gui::
 Octave
 ======
 
-sudo aptitude install octave
+sudo aptitude install octave liboctave-dev
+
+Biomechanics Tool Kit
+=====================
+
+Dependencies are: swig python-numpy octave liboctave-dev doxygen
+
+git clone git@github.com:Biomechanical-ToolKit/BTKCore.git ~/src/BTKCore
+git clone git@github.com:Biomechanical-ToolKit/BTKData.git ~/Data/BTKData
+cd ~/src/BTKCore
+mkdir build
+cd build
+cmake \
+   -DCMAKE_BUILD_TYPE:CHAR=Release \
+   -DBUILD_SHARED_LIBS:BOOL=1 \
+   -DBTK_WRAP_PYTHON:BOOL=1 \
+   -DBTK_WRAP_OCTAVE:BOOL=1 \
+   -DBUILD_TESTING:BOOL=1 \
+   -DBTK_TESTING_DATA_PATH:CHAR=~/Data/BTKData \
+   -DBTK_EXTRA_COMPILER_WARNINGS:BOOL=1 \
+   -DBUILD_DOCUMENTATION:BOOL=1 \
+   -DBUILD_DOCUMENTATION_API:BOOL=1 \
+   -DBUILD_DOCUMENTATION_API_UNSELECTED_MODULES:BOOL=1 \
+   -DBUILD_DOCUMENTATION_MOKKA:BOOL=1 \
+   -DBUILD_DOCUMENTATION_README:BOOL=1 \
+   -DBUILD_EXAMPLES:BOOL=1 \
+   -G "Unix Makefiles" ..
+make # or make -j4
+sudo make install
+
+There are also these:
+BTK_USE_VISSUPPORT
+BTK_USE_VTK
+BUILD_TOOLS
+
+But cmake didn't automatically detect VTK.
+
+this may require the LD_LIBRARY_PATH environment variable to be set.
 
 Plone
 =====
