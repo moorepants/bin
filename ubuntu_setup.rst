@@ -465,7 +465,9 @@ sudo aptitude install octave liboctave-dev
 Biomechanics Tool Kit
 =====================
 
-Dependencies are: swig python-numpy octave liboctave-dev doxygen
+Dependencies are: swig python-numpy octave liboctave-dev doxygen libvtk5-dev
+
+sudo aptitude install libvtk5-dev
 
 git clone git@github.com:Biomechanical-ToolKit/BTKCore.git ~/src/BTKCore
 git clone git@github.com:Biomechanical-ToolKit/BTKData.git ~/Data/BTKData
@@ -483,21 +485,22 @@ cmake \
    -DBUILD_DOCUMENTATION:BOOL=1 \
    -DBUILD_DOCUMENTATION_API:BOOL=1 \
    -DBUILD_DOCUMENTATION_API_UNSELECTED_MODULES:BOOL=1 \
-   -DBUILD_DOCUMENTATION_MOKKA:BOOL=1 \
-   -DBUILD_DOCUMENTATION_README:BOOL=1 \
    -DBUILD_EXAMPLES:BOOL=1 \
+   -DPYTHON_LIBRARY:CHAR=/usr/lib/x86_64-linux-gnu/libpython2.7.so \
+   -DPYTHON_INCLUDE_DIR:CHAR=/usr/include/python2.7 \
+   -DBTK_USE_VISSUPPORT:BOOL=1 \
+   -DBTK_USE_VTK:BOOL=1 \
+   -DBUILD_TOOLS:BOOL=1 \
    -G "Unix Makefiles" ..
 make # or make -j4
 sudo make install
 
 There are also these:
-BTK_USE_VISSUPPORT
-BTK_USE_VTK
-BUILD_TOOLS
 
-But cmake didn't automatically detect VTK.
+But cmake didn't automatically detect VTK on my first try. Will need to
+revisit.
 
-this may require the LD_LIBRARY_PATH environment variable to be set.
+this may require the LD_LIBRARY_PATH environment variable to be set to use it
 
 Plone
 =====
