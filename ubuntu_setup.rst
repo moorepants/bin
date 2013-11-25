@@ -102,7 +102,7 @@ Software Development
 
 ::
 
-   $ sudo aptitude install build-essential gfortran python-dev cmake cmake-curses-gui doxygen valgrind
+   $ sudo aptitude install build-essential gfortran python-dev cmake cmake-curses-gui doxygen valgrind swig
 
 Install pip::
 
@@ -275,8 +275,8 @@ JabRef::
 
 Install Zotero::
 
-   wget http://download.zotero.org/standalone/4.0.9/Zotero-4.0.9_linux-x86_64.tar.bz2
-   tar -jxvf Zotero-4.0.9_linux-x86_64.tar.bz2
+   wget http://download.zotero.org/standalone/4.0.16/Zotero-4.0.16_linux-x86_64.tar.bz2
+   tar -jxvf Zotero-4.0.16_linux-x86_64.tar.bz2
    sudo cp -r Zotero_linux-x86_64/ /opt/zotero
 
    vim ~/.local/share/applications/zotero.desktop
@@ -464,6 +464,63 @@ do it for me even though I selected custom install. So I added this::
 Put this in bashrc because I rarely use the gui::
 
    alias matlab='matlab -nodesktop -nosplash'
+
+Octave
+======
+
+sudo aptitude install octave liboctave-dev
+
+Biomechanics Tool Kit
+=====================
+
+Dependencies are: swig python-numpy octave liboctave-dev doxygen libvtk5-dev
+
+sudo aptitude install libvtk5-dev libphonon4 libqtscript4-phonon libphonon-dev phonon-backend-gstreamer libvtk5.8-qt4
+
+You need libphonon-dev for
+/usr/lib/x86_64-linux-gnu/qt4/plugins/designer/libphononwidgets.so
+
+See http://packages.ubuntu.com/saucy/amd64/libphonon-dev/filelist
+
+I'm not sure the other phonon packages are needed.
+
+I had to specifiy the moc, uic, and python paths exactly to prevent errors in
+cmake finding them.
+
+git clone git@github.com:Biomechanical-ToolKit/BTKCore.git ~/src/BTKCore
+git clone git@github.com:Biomechanical-ToolKit/BTKData.git ~/Data/BTKData
+cd ~/src/BTKCore
+mkdir build
+cd build
+cmake \
+   -DCMAKE_BUILD_TYPE:CHAR=Release \
+   -DBUILD_SHARED_LIBS:BOOL=1 \
+   -DBTK_WRAP_PYTHON:BOOL=1 \
+   -DBTK_WRAP_OCTAVE:BOOL=1 \
+   -DBUILD_TESTING:BOOL=1 \
+   -DBTK_TESTING_DATA_PATH:CHAR=~/Data/BTKData \
+   -DBTK_EXTRA_COMPILER_WARNINGS:BOOL=1 \
+   -DBUILD_DOCUMENTATION:BOOL=1 \
+   -DBUILD_DOCUMENTATION_API:BOOL=1 \
+   -DBUILD_DOCUMENTATION_API_UNSELECTED_MODULES:BOOL=1 \
+   -DBUILD_EXAMPLES:BOOL=1 \
+   -DPYTHON_LIBRARY:CHAR=/usr/lib/x86_64-linux-gnu/libpython2.7.so \
+   -DPYTHON_INCLUDE_DIR:CHAR=/usr/include/python2.7 \
+   -DBTK_USE_VISSUPPORT:BOOL=1 \
+   -DBTK_USE_VTK:BOOL=1 \
+   -DBUILD_TOOLS:BOOL=1 \
+   -DQT_MOC_EXECUTABLE:PATH=/usr/bin/moc \
+   -DQT_UIC_EXECUTABLE:PATH=/usr/bin/uic \
+   -G "Unix Makefiles" ..
+make # or make -j4
+sudo make install
+
+There are also these:
+
+But cmake didn't automatically detect VTK on my first try. Will need to
+revisit.
+
+this may require the LD_LIBRARY_PATH environment variable to be set to use it
 
 Plone
 =====
