@@ -467,7 +467,17 @@ Biomechanics Tool Kit
 
 Dependencies are: swig python-numpy octave liboctave-dev doxygen libvtk5-dev
 
-sudo aptitude install libvtk5-dev
+sudo aptitude install libvtk5-dev libphonon4 libqtscript4-phonon libphonon-dev phonon-backend-gstreamer libvtk5.8-qt4
+
+You need libphonon-dev for
+/usr/lib/x86_64-linux-gnu/qt4/plugins/designer/libphononwidgets.so
+
+See http://packages.ubuntu.com/saucy/amd64/libphonon-dev/filelist
+
+I'm not sure the other phonon packages are needed.
+
+I had to specifiy the moc, uic, and python paths exactly to prevent errors in
+cmake finding them.
 
 git clone git@github.com:Biomechanical-ToolKit/BTKCore.git ~/src/BTKCore
 git clone git@github.com:Biomechanical-ToolKit/BTKData.git ~/Data/BTKData
@@ -491,6 +501,8 @@ cmake \
    -DBTK_USE_VISSUPPORT:BOOL=1 \
    -DBTK_USE_VTK:BOOL=1 \
    -DBUILD_TOOLS:BOOL=1 \
+   -DQT_MOC_EXECUTABLE:PATH=/usr/bin/moc \
+   -DQT_UIC_EXECUTABLE:PATH=/usr/bin/uic \
    -G "Unix Makefiles" ..
 make # or make -j4
 sudo make install
