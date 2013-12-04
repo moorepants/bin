@@ -193,6 +193,16 @@ Wine::
 
    $ sudo aptitude install wine
 
+Applets
+
+CPU load and cpu frequency selection::
+
+   $ sudo apt-get install indicator-multiload
+   $ sudo apt-get install indicator-cpufreq
+
+See here for more stuff:
+http://www.webupd8.org/2013/10/8-things-to-do-after-installing-ubuntu.html
+
 Graphics
 ========
 
