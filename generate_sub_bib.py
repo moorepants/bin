@@ -53,6 +53,11 @@ class SubBib(object):
             print("{} is already up-to-date, add --force to force a rebuild".format(self.path_to_sub))
 
     def rebuild_is_needed(self):
+        # TODO : If you add a citation to your tex file after you've already
+        # built the sub bib file and haven't edited your main bib, then this
+        # will return False, but it should return True because there is a
+        # new citation in the file. So I need something to check whether
+        # there are new citations or not compared to the sub bib.
         try:
             open(self.path_to_sub, 'r')
         except IOError:

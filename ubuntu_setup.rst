@@ -314,6 +314,14 @@ Web Development
 
    $ sudo pip install fabric hyde
 
+MathJax
+
+git clone git://github.com/mathjax/MathJax.git ~/src/MathJax
+
+deck.js
+
+git clone git@github.com:imakewebthings/deck.js.git ~/src/deck.js
+
 Virutalbox::
 
    $ sudo aptitude install virtualbox
