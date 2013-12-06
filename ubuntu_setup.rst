@@ -475,6 +475,16 @@ Put this in bashrc because I rarely use the gui::
 
    alias matlab='matlab -nodesktop -nosplash'
 
+Anaconda
+--------
+
+$ wget http://09c8d0b2229f813c1b93-c95ac804525aac4b6dba79b00b39d1d3.r79.cf1.rackcdn.com/Anaconda-1.8.0-Linux-x86_64.sh
+$ sudo bash Anaconda-1.8.0-Linux-x86_64.sh
+
+Choose the install directory to be ``/opt/anaconda``.
+
+Do not add the path statement to .bashrc.
+
 Octave
 ======
 
