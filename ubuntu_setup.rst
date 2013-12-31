@@ -498,6 +498,8 @@ Octave
 
 sudo aptitude install octave liboctave-dev
 
+sudo pip install oct2py
+
 Biomechanics Tool Kit
 =====================
 
