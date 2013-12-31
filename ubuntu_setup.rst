@@ -119,6 +119,14 @@ Add this to bashrc::
    export WORKON_HOME=$HOME/envs
    source /usr/local/bin/virtualenvwrapper.sh
 
+Numpydoc for Sphinx::
+
+   $ sudo pip install numpydoc
+
+Coverage::
+
+   $ sudo pip install coverage
+
 General
 =======
 
@@ -779,3 +787,20 @@ a grey back ground and if it doesn't it doesn't allow my icons on my desktop to
 show through.
 
 Logout and log back in then, open conky setup menu from the dash.
+
+HP 2170p
+========
+
+These are specific instructions for the HP Elitebook 2170p I use at work. The
+brightness controls (f9, f10, and system settings) did not work by default.
+
+To fix the brightness controls you must edit (sudo) the ``/etc/default/grub``
+file and add this argument to ``GRUB_CMDLINE_LINUX``::
+
+   GRUB_CMDLINE_LINUX="acpi_backlight=vendor"
+
+Then run::
+
+   $ sudo update-grub && shutdown -r now
+
+The the f9 and f10 keys work for changing brightness.
