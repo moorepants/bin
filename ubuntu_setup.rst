@@ -781,3 +781,12 @@ a grey back ground and if it doesn't it doesn't allow my icons on my desktop to
 show through.
 
 Logout and log back in then, open conky setup menu from the dash.
+
+XMBC
+====
+
+sudo apt-get install python-software-properties pkg-config
+sudo apt-get install software-properties-common
+sudo add-apt-repository ppa:team-xbmc/ppa
+sudo apt-get update
+sudo apt-get install xbmc
