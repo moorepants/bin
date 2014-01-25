@@ -303,8 +303,8 @@ JabRef::
 
 Install Zotero::
 
-   wget http://download.zotero.org/standalone/4.0.16/Zotero-4.0.16_linux-x86_64.tar.bz2
-   tar -jxvf Zotero-4.0.16_linux-x86_64.tar.bz2
+   wget http://download.zotero.org/standalone/4.0.17/Zotero-4.0.17_linux-x86_64.tar.bz2
+   tar -jxvf Zotero-4.0.17_linux-x86_64.tar.bz2
    sudo cp -r Zotero_linux-x86_64/ /opt/zotero
 
    vim ~/.local/share/applications/zotero.desktop
