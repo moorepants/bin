@@ -211,6 +211,12 @@ CPU load and cpu frequency selection::
 See here for more stuff:
 http://www.webupd8.org/2013/10/8-things-to-do-after-installing-ubuntu.html
 
+Wallpapers:
+
+   $ sudo add-apt-repository ppa:peterlevi/ppa
+   $ sudo aptitude update
+   $ sudo aptitude install variety
+
 Graphics
 ========
 
@@ -246,6 +252,10 @@ Gexiv2::
 After that you can use it in virtualenvs:
 
 http://stackoverflow.com/questions/17472124/how-to-install-gexiv2-on-a-virtualenv
+
+ffmpeg::
+
+   $ sudo aptitude install ffmpeg
 
 Communication
 =============
@@ -389,6 +399,10 @@ Install from source::
 
    $ sudo pip install cython # theano and pandas use to build
    $ sudo pip install numpy scipy nose pandas theano sympy
+
+SymPy development (building docs) requires::
+
+   $ sudo aptitude install librsvg2-bin
 
 IPython needs the ZMQ libs::
 
