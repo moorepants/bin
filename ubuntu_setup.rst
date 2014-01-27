@@ -219,6 +219,12 @@ CPU load and cpu frequency selection::
 See here for more stuff:
 http://www.webupd8.org/2013/10/8-things-to-do-after-installing-ubuntu.html
 
+Wallpapers:
+
+   $ sudo add-apt-repository ppa:peterlevi/ppa
+   $ sudo aptitude update
+   $ sudo aptitude install variety
+
 Graphics
 ========
 
@@ -254,6 +260,10 @@ Gexiv2::
 After that you can use it in virtualenvs:
 
 http://stackoverflow.com/questions/17472124/how-to-install-gexiv2-on-a-virtualenv
+
+ffmpeg::
+
+   $ sudo aptitude install ffmpeg
 
 Communication
 =============
@@ -301,8 +311,8 @@ JabRef::
 
 Install Zotero::
 
-   wget http://download.zotero.org/standalone/4.0.16/Zotero-4.0.16_linux-x86_64.tar.bz2
-   tar -jxvf Zotero-4.0.16_linux-x86_64.tar.bz2
+   wget http://download.zotero.org/standalone/4.0.17/Zotero-4.0.17_linux-x86_64.tar.bz2
+   tar -jxvf Zotero-4.0.17_linux-x86_64.tar.bz2
    sudo cp -r Zotero_linux-x86_64/ /opt/zotero
 
    vim ~/.local/share/applications/zotero.desktop
@@ -397,6 +407,10 @@ Install from source::
 
    $ sudo pip install cython # theano and pandas use to build
    $ sudo pip install numpy scipy nose pandas theano sympy
+
+SymPy development (building docs) requires::
+
+   $ sudo aptitude install librsvg2-bin
 
 IPython needs the ZMQ libs::
 
@@ -887,6 +901,15 @@ a grey back ground and if it doesn't it doesn't allow my icons on my desktop to
 show through.
 
 Logout and log back in then, open conky setup menu from the dash.
+
+XMBC
+====
+
+sudo apt-get install python-software-properties pkg-config
+sudo apt-get install software-properties-common
+sudo add-apt-repository ppa:team-xbmc/ppa
+sudo apt-get update
+sudo apt-get install xbmc
 
 HP 2170p
 ========
