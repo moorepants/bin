@@ -265,6 +265,10 @@ ffmpeg::
 
    $ sudo aptitude install ffmpeg
 
+IPE::
+
+   $ sudo aptitude install ipe
+
 Communication
 =============
 
