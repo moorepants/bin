@@ -63,6 +63,10 @@ Hub::
    $ cd ~/src/hub
    $ sudo rake1.9.1 install
 
+git-svn::
+
+   $ sudo aptitude install git-svn
+
 Dot Files
 =========
 
@@ -126,6 +130,10 @@ Numpydoc for Sphinx::
 Coverage::
 
    $ sudo pip install coverage
+
+check-manifest::
+
+   $ pip install check-manifest
 
 General
 =======
@@ -486,6 +494,22 @@ Press enter to keep the current choice[*], or type selection number: 1
 
 The tests passed at this point.
 
+Slycot
+======
+
+numpy, blas/lapack, gfortran are required
+
+git clone git@github.com:avventi/Slycot.git
+cd Slycot
+sudo python setup.py install
+
+python-control
+==============
+
+git svn -s http://svn.code.sf.net/p/python-control/code python-control
+cd python-control
+sudo python setup.py install
+
 Matlab
 ======
 
@@ -516,12 +540,86 @@ Choose the install directory to be ``/opt/anaconda``.
 
 Do not add the path statement to .bashrc.
 
+chrpath is required to build some packages:
+
+$ sudo aptitude install chrpath
+
 Octave
 ======
+
+sudo apt-add-repository ppa:octave/stable
+sudo apt-get update
 
 sudo aptitude install octave liboctave-dev
 
 sudo pip install oct2py
+
+To install from source, first get the dependencies::
+
+   sudo apt-get install \
+   autoconf \
+   automake \
+   bison \
+   doxygen \
+   epstool \
+   flex \
+   freeglut3 \
+   freeglut3-dev \
+   gcc \
+   g++ \
+   gfortran \
+   glpk \
+   gnuplot \
+   gperf \
+   graphviz \
+   mercurial \
+   libarpack2 \
+   libarpack2-dev \
+   libblas3gf \
+   libblas-dev \
+   libcurl4-openssl-dev \
+   libfftw3-3 \
+   libfftw3-dev \
+   libfltk1.3 \
+   libfltk1.3-dev \
+   libfontconfig1 \
+   libfontconfig1-dev \
+   libfreetype6 \
+   libfreetype6-dev \
+   libgl2ps-dev \
+   libgraphicsmagick++1-dev \
+   libhdf5-serial-dev \
+   liblapack-dev \
+   liblapack3gf \
+   libpcre3 \
+   libpcre3-dev \
+   libqhull5 \
+   libqhull-dev \
+   libqscintilla2-dev \
+   libqt4-dev \
+   libqrupdate1 \
+   libqrupdate-dev \
+   libreadline6 \
+   libreadline6-dev \
+   libsuitesparse-dev \
+   libtool \
+   llvm \
+   openjdk-7-jdk \
+   openjdk-7-jre \
+   pkg-config \
+   transfig \
+   zlibc \
+   zlib1g \
+   zlib1g-dev \
+
+   hg clone http://hg.savannah.gnu.org/hgweb/octave/
+
+   cd octave
+   ./bootstrap
+   mkdir build
+   cd build
+   ../configure
+   make
 
 Biomechanics Tool Kit
 =====================
