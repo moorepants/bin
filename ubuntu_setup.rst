@@ -217,6 +217,15 @@ Wallpapers:
    $ sudo aptitude update
    $ sudo aptitude install variety
 
+   $ sudo aptitude install pdftk
+
+Battery life::
+
+   sudo add-apt-repository ppa:linrunner/tlp
+   sudo apt-get update
+   sudo apt-get install tlp tlp-rdw
+   sudo tlp start
+
 Graphics
 ========
 
