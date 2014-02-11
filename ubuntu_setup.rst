@@ -53,6 +53,22 @@ Make the git subtree command work (only needed in Ubuntu 13.04, not 13.10)::
    $ sudo chmod +x /usr/share/doc/git/contrib/subtree/git-subtree.sh
    $ sudo ln -s /usr/share/doc/git/contrib/subtree/git-subtree.sh /usr/lib/git-core/git-subtree
 
+Add some nice things to ``~/.gitconfig``::
+
+   [color]
+       diff  = auto
+       status= auto
+       branch= auto
+       interactive = true
+
+   [alias]
+       ci = commit
+       di = diff --color-words
+       st = status
+       co = checkout
+       log1 = log --pretty=oneline --abbrev-commit
+       logs = log --stat
+
 Generate a ssh key::
 
    $ ssh-keygen -t rsa -C "moorepants@gmail.com"
@@ -133,7 +149,11 @@ Coverage::
 
 check-manifest::
 
-   $ pip install check-manifest
+   $ sudo pip install check-manifest
+
+sake::
+
+   $ sudo pip install master-sake
 
 General
 =======
