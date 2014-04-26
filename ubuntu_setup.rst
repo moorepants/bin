@@ -83,6 +83,10 @@ git-svn::
 
    $ sudo aptitude install git-svn
 
+git-annex::
+
+   $ sudo aptitude install git-annex
+
 Dot Files
 =========
 
