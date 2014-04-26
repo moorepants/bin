@@ -384,6 +384,14 @@ Add .bashrc alias::
 
    alias zotero=/opt/zotero/zotero
 
+If you want to be able to have autoupdates from in the software and install to
+/opt/ with sudo then you must make the directory writeble by the users that
+want to do the update.
+
+sudo chown moorepants:moorepants /opt/zotero
+or
+sudo chmod o+w /opt/zotero
+
 Web Development
 ===============
 
@@ -452,7 +460,7 @@ IPython dependencies::
 
 Install these from the package manager::
 
-   $ sudo aptitude install python-tables mayavi2
+   $ sudo aptitude install python-tables mayavi2 vitables
 
 Install from source::
 
