@@ -155,6 +155,12 @@ sake::
 
    $ sudo pip install master-sake
 
+Python versions::
+
+   sudo add-apt-repository ppa:fkrull/deadsnakes
+   sudo apt-get update
+   sudo aptitude install python2.6
+
 General
 =======
 
@@ -220,6 +226,10 @@ Random::
 
    $ sudo aptitude install gparted grsync colordiff chromium-browser
 
+Allows interaction with HFS+ filesystem (format option in gparted)::
+
+   $ sudo apt-get install hfsprogs
+
 Installing hal is supposed to let me watch Flash videos with DRM, but I can't
 get a purchased Youtube movie to work::
 
@@ -227,6 +237,8 @@ get a purchased Youtube movie to work::
 
 Wine::
 
+   $ sudo add-apt-repository ppa:ubuntu-wine/ppa
+   $ sudo apitude update
    $ sudo aptitude install wine
 
 Applets
@@ -717,6 +729,10 @@ csympy
 
 apt-get install libgmp-dev
 
+git clone
+cmake -DWITH_PYTHON=yes -DPYTHON_LIBRARY=/usr/bin/python .
+make
+
 Lua
 ===
 
@@ -783,6 +799,14 @@ SimpleScreenRecorder::
    $ sudo add-apt-repository ppa:maarten-baert/simplescreenrecorder
    $ sudo apt-get update
    $ sudo apt-get install simplescreenrecorder
+
+youtube-dl::
+
+   $ sudo aptitude install youtube-dl
+
+OpenShot::
+
+   $ sudo aptitude install openshot openshot-doc
 
 Simbody
 =======
