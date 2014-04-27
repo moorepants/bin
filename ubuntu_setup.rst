@@ -85,7 +85,15 @@ git-svn::
 
 git-annex::
 
-   $ sudo aptitude install git-annex
+   $ sudo aptitude install git-annex openssh-server
+
+Now that this machine is accessible via ssh, make it more secure by editing
+``/etc/ssh/sshd_config`` and restarting the ssh daemon.
+
+``PermitRootLogin without-password`` > ``PermitRootLogin no``
+
+``#PasswordAuthentication yes`` > ``PasswordAuthentication no``
+``UsePAM yes > ``UsePAM no``
 
 Dot Files
 =========
