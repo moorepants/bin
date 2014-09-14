@@ -95,6 +95,9 @@ Now that this machine is accessible via ssh, make it more secure by editing
 ``#PasswordAuthentication yes`` > ``PasswordAuthentication no``
 ``UsePAM yes > ``UsePAM no``
 
+Note: I think the above screwed things up so now Git asks for the passphrase
+for my id_rsa file all the time now.
+
 Dot Files
 =========
 
@@ -110,6 +113,7 @@ Make symlinks to dot files::
    $ ln -s ~/src/dotfiles/tex.vim ~/.vim/after/ftplugin/tex.vim
    $ ln -s ~/src/dotfiles/matlab.vim ~/.vim/after/ftplugin/matlab.vim
    $ ln -s ~/src/dotfiles/rst.vim ~/.vim/after/ftplugin/rst.vim
+   $ ln -s ~/src/dotfiles/cpp.vim ~/.vim/after/ftplugin/cpp.vim
 
 Vim
 ===
@@ -172,6 +176,15 @@ Python versions::
    sudo add-apt-repository ppa:fkrull/deadsnakes
    sudo apt-get update
    sudo aptitude install python2.6
+
+Hipchat::
+
+   sudo su
+   echo "deb http://downloads.hipchat.com/linux/apt stable main" > \
+     /etc/apt/sources.list.d/atlassian-hipchat.list
+   wget -O - https://www.hipchat.com/keys/hipchat-linux.key | apt-key add -
+   apt-get update
+   apt-get install hipchat
 
 General
 =======
@@ -283,6 +296,16 @@ Sound switcher::
    sudo apt-add-repository ppa:yktooo/ppa
    sudo apt-get update
    sudo apt-get install indicator-sound-switcher
+
+Samba::
+
+cifs-utils allows mounting shares from the command line.
+
+   sudo aptitude install cifs-utils
+
+Count Lines of Code (cloc)::
+
+   sudo aptitude install cloc
 
 Graphics
 ========
@@ -735,6 +758,50 @@ revisit.
 
 this may require the LD_LIBRARY_PATH environment variable to be set to use it
 
+IPOPT
+=====
+
+This didn't really seem to work::
+
+   sudo aptitude install coinor-libipopt1 coinor-libipopt-dev coinor-libipopt-doc
+
+So I did it from source (after removing the above):
+
+svn co https://projects.coin-or.org/svn/Ipopt/stable/3.11 CoinIpopt
+$ cd CoinIpopt/ThirdParty/Blas
+$ ./get.Blas
+$ cd ../Lapack
+$ ./get.Lapack
+$ cd ../ASL
+$ ./get.ASL
+
+That gets the slower reference BLAS, but you could use your own but need this
+complilation flag: --with-blas="-L$HOME/lib -lmyblas"
+
+Get the HSL code (not required because Mumps can be used) (this can be link
+after compiling ipopt too)
+
+cd ../Mumps
+./get.Mumps
+cd ../Metis
+./get.Metis
+
+cd CoinIpopt/build
+./configure # maybe want to --prefix /usr/local, alsocan tell it where blas is and stuff here
+make -j5
+make test
+sudo make install
+
+cyipopt
+=======
+
+This is needed if IPopt is not installed system wide.
+export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:~/src/CoinIpopt/lib/pkgconfig
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:~/src/CoinIpopt/lib
+edit setup.py
+python setup.py install
+
+
 Plone
 =====
 
@@ -923,6 +990,9 @@ seems to have been /usr/local instead of /usr/local/SimTK.
 I need to uninstall and go into the advanced toggle in ccmake and set
 `CMAKE_INSTALL_PREFIX` to `/usr/local/SimTK` and then reinstall.
 
+I should probably remove /usr/local/SimTK since I installed with the lastest
+version that actually knows about preferred install paths in Linux.
+
 OpenSim
 =======
 
@@ -966,6 +1036,33 @@ Install anyway::
    $ export LD_LIBRARY_PATH=/usr/local/SimTK/lib:/usr/local/OpenSim/lib
    $ python3
    >>> import opensim
+
+Second time installing:
+
+sudo aptitude install cmake-gui g++-4.8 doxygen git openjdk-7-jdk python-dev swig
+mkdir ~/src/opensim
+cd ~/src/opensim
+git clone git@github.com:opensim-org/opensim-core.git
+mkdir build
+cd build
+cmake ../opensim-core
+   -DCMAKE_INSTALL_PREFIX=~/opt/opensim
+   -DSimTK_INSTALL_DIR=/usr/local
+   -DCMAKE_BUILD_TYPE=Release
+   -DBUILD_EXAMPLES=On
+   -DBUILD_TESTING=On
+   -DBUILD_JAVA_WRAPPING=On
+   -DBUILD_PYTHON_WRAPPING=On
+
+make doxygen
+make -j5
+ctest -j5
+sudo make -j5 install
+
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/opensim/lib
+export PATH=/opt/opensim/bin:$PATH
+
+Need to make the Opensim headers available.
 
 Old
 ===
