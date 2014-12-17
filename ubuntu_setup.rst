@@ -138,7 +138,11 @@ Software Development
 
 ::
 
-   $ sudo aptitude install build-essential gfortran python-dev cmake cmake-curses-gui doxygen valgrind swig
+   $ sudo aptitude install build-essential gfortran python-dev cmake cmake-curses-gui doxygen valgrind swig clang
+
+Switching between gcc and clang for C++:
+
+sudo update-alternatives --config c++
 
 Install pip::
 
@@ -185,6 +189,20 @@ Hipchat::
    wget -O - https://www.hipchat.com/keys/hipchat-linux.key | apt-key add -
    apt-get update
    apt-get install hipchat
+
+yaml-cpp::
+
+   sudo aptitude install libyaml-cpp0.5 libyaml-cpp-dev
+
+0.5 depends on Boost::
+
+   sudo aptitude install libboost-all-dev
+
+pypy::
+
+   sudo aptitude install pypy
+
+   sudo aptitude install qtcreator
 
 General
 =======
@@ -307,6 +325,10 @@ Count Lines of Code (cloc)::
 
    sudo aptitude install cloc
 
+linkchecker::
+
+   sudo aptitud install linkchecker
+
 Graphics
 ========
 
@@ -378,7 +400,9 @@ Document Processing
 
 Get a LaTeX distribution and biblatex::
 
-   $ sudo aptitude install texlive texlive-bibtex-extra biber
+   $ sudo aptitude install texlive texlive-bibtex-extra biber texlive-xetex texlive-fonts-extra texlive-science texlive-humanities
+
+Sympy's uses xelatex to build it's docs.
 
 Pandoc::
 
@@ -387,6 +411,10 @@ Pandoc::
 Pybtex::
 
    $ sudo pip install pybtex
+
+Okular (this installs a bunch of KDE deps)::
+
+   $ sudo aptitude install okular
 
 Reference Management
 ====================
@@ -446,11 +474,22 @@ Virutalbox::
 
    $ sudo aptitude install virtualbox
 
-Vagrant. Go to http://downloads.vagrantup.com to download the latest x86_64 deb file and
-then click on it::
+Vagrant 1.4.3::
 
-   $ wget http://files.vagrantup.com/packages/0ac2a87388419b989c3c0d0318cc97df3b0ed27d/vagrant_1.3.4_x86_64.deb -O ~/Downloads/vagrant_1.3.4_x86_64.deb
-   $ dpkg -i ~/Downloads/vagrant_1.3.4_x86_64.deb
+   $ sudo aptitude install vagrant
+
+I had this error when using vagrant and it needed to download a box::
+
+   moorepants@moorepants-2170p:plonedev.vagrant((4.3.3))$ curl https://cloud-images.ubuntu.com/vagrant/trusty/current/trusty-server-cloudimg-i386-vagrant-disk1.box
+   curl: (77) error setting certificate verify locations:
+     CAfile: /etc/pki/tls/certs/ca-bundle.crt
+     CApath: none
+
+I found a solution here: https://github.com/mitchellh/vagrant/issues/3227 ::
+
+   echo insecure >> ~/.curlrc
+
+But this probably isn't a good solution.
 
 ::
    $ sudo pip install requests slumber pyyaml simplejson
@@ -465,6 +504,10 @@ sudo aptitude remove nodejs npm
 sudo add-apt-repository ppa:chris-lea/node.js
 sudo apt-get update
 sudo aptitude install nodejs npm
+
+Docker
+
+sudo aptitude install docker.io
 
 BLAS/LAPACK
 ===========
@@ -768,6 +811,7 @@ This didn't really seem to work::
 So I did it from source (after removing the above):
 
 svn co https://projects.coin-or.org/svn/Ipopt/stable/3.11 CoinIpopt
+
 $ cd CoinIpopt/ThirdParty/Blas
 $ ./get.Blas
 $ cd ../Lapack
@@ -786,11 +830,24 @@ cd ../Mumps
 cd ../Metis
 ./get.Metis
 
+cd ~/src/CoinIpopt
+mkdir build
 cd CoinIpopt/build
-./configure # maybe want to --prefix /usr/local, alsocan tell it where blas is and stuff here
+../configure # maybe want to --prefix /usr/local, alsocan tell it where blas is and stuff here
+
+for pardiso
+mkdir ThirdParty/Pardiso
+cp <.so file> ThirdParty/Pardiso
+--with-pardiso="-qsmp=omp $HOME/lib/libpardiso_P4AIX51_64_P.so"
+
+openmp support for hsl_ma86 and hsl_ma97: ADD_CFLAGS=-fopenmp ADD_FFLAGS=-fopenmp ADD_CXXFLAGS=-fopenmp
 make -j5
 make test
 sudo make install
+
+Set paridiso ENV var
+
+export OMP_NUM_THREADS=4
 
 cyipopt
 =======
@@ -1039,20 +1096,26 @@ Install anyway::
 
 Second time installing:
 
+conda create -n opensim numpy scipy ipython matplotlib
 sudo aptitude install cmake-gui g++-4.8 doxygen git openjdk-7-jdk python-dev swig
 mkdir ~/src/opensim
 cd ~/src/opensim
 git clone git@github.com:opensim-org/opensim-core.git
+cd opensim-core
 mkdir build
 cd build
-cmake ../opensim-core
-   -DCMAKE_INSTALL_PREFIX=~/opt/opensim
-   -DSimTK_INSTALL_DIR=/usr/local
-   -DCMAKE_BUILD_TYPE=Release
-   -DBUILD_EXAMPLES=On
-   -DBUILD_TESTING=On
-   -DBUILD_JAVA_WRAPPING=On
-   -DBUILD_PYTHON_WRAPPING=On
+cmake \
+   -DCMAKE_INSTALL_PREFIX=~/opt/opensim \
+   -DCMAKE_BUILD_TYPE=Release \
+   -DBUILD_EXAMPLES=On \
+   -DBUILD_TESTING=On \
+   -DBUILD_JAVA_WRAPPING=Off \
+   -DBUILD_PYTHON_WRAPPING=On \
+   -DPYTHON_EXECUTABLE=/home/moorepants/anaconda/envs/opensim/bin \
+   -DPYTHON_INCLUDE_DIR=/home/moorepants/anaconda/envs/opensim/include/python2.7 \
+   -DPYTHON_LIBRARY=/home/moorepants/anaconda/envs/opensim/lib/libpython2.7.so \
+   -DSIMBODY_HOME=/usr/local \
+   ..
 
 make doxygen
 make -j5
