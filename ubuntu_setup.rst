@@ -204,6 +204,14 @@ pypy::
 
    sudo aptitude install qtcreator
 
+shellcheck::
+
+   sudo aptitude install shellcheck
+
+coffeescript::
+
+   sudo aptitude install coffeescript
+
 General
 =======
 
@@ -215,6 +223,10 @@ $ dpkg -i ~/Downloads/dropbox_1.6.0_amd64.deb
 Install KeePassX::
 
   $ sudo aptitude install keepassx
+
+To build hamster these are the deps::
+
+  $ sudo aptitude install git-core gettext intltool python-gconf python-xdg
 
 Install Hamster::
 
@@ -328,6 +340,10 @@ Count Lines of Code (cloc)::
 linkchecker::
 
    sudo aptitud install linkchecker
+
+Flash for Chromium:
+
+   sudo aptitude install pepperflashplugin-nonfree
 
 Graphics
 ========
