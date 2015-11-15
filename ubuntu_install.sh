@@ -12,6 +12,7 @@ if [ ! -f "$HOME/.ssh/id_rsa.pub" ]; then
 fi
 
 # Upload the public key to Github.
+# If the key is already there, this fails gracefully.
 TITLE=$( hostname )
 KEY=$( cat $HOME/.ssh/id_rsa.pub )
 JSON=$( printf '{"title": "%s", "key": "%s"}' "$TITLE" "$KEY" )
@@ -25,18 +26,23 @@ cd $HOME/Downloads
 wget https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_2015.10.28_amd64.deb -O dropbox_2015.10.28_amd64.deb
 sudo dpkg -i dropbox_2015.10.28_amd64.deb
 cd -
+cd $HOME/Downloads
+sudo apt-get install libxss1 libappindicator1 libindicator7
+wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+sudo dpkg -i google-chrome*.deb
+cd -
 
 # Setup all the configuration files.
 mkdir -p $HOME/src
 if [ ! -d "$HOME/src/dotfiles" ]; then
   git clone git@github.com:moorepants/dotfiles.git $HOME/src/dotfiles
 fi
-for config in .bashrc .vimrc .gitconfig
+for config in bashrc vimrc gitconfig
 do
-  if [ -f "$HOME/$config" ]; then
-    rm $HOME/$config
+  if [ -f "$HOME/.$config" ]; then
+    rm $HOME/.$config
   fi
-  ln -s $HOME/src/dotfiles/$config $HOME/$config
+  ln -s $HOME/src/dotfiles/$config $HOME/.$config
 done
 mkdir -p $HOME/.vim/after/ftplugin
 rm $HOME/.vim/after/ftplugin/*
@@ -47,9 +53,14 @@ done
 if [ ! -d "$HOME/.vim/bundle/vundle" ]; then
   git clone git@github.com:gmarik/vundle.git $HOME/.vim/bundle/vundle
 fi
-hg clone https://bitbucket.org/pv/textext $HOME/src/textext/
+if [ ! -d "$HOME/src/textext" ]; then
+  hg clone https://bitbucket.org/pv/textext $HOME/src/textext
+fi
+mkdir -p $HOME/.config/inkscape/extensions
 cp $HOME/src/textext/textext.py $HOME/.config/inkscape/extensions/
 cp $HOME/src/textext/textex.inx $HOME/.confing/inkscape/extensions/
+
+# Install some source repos
 git clone git@github.com:mathjax/MathJax.git $HOME/src/MathJax
 git clone git@github.com:imakewebthings/deck.js.git $HOME/src/deck.js
 
