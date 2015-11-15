@@ -1,43 +1,57 @@
-sudo apt-get install git
+# First create a rsa_passphrase.txt and github_token.txt files.
+
+# Install git and curl as the two essential dependencies to this script.
+sudo apt-get -y install git curl
 git config --global user.email "moorepants@gmail.com"
 git config --global user.name "Jason K. Moore"
 git config --global core.editor "vim"
-if [ ! -f "~/.ssh/id_rsa.pub" ]; then
-  ssh-keygen -t rsa -C "moorepants@gmail.com"
+if [ ! -f "$HOME/.ssh/id_rsa.pub" ]; then
+  mkdir -p $HOME/.ssh
+  PASSPHRASE=$( cat rsa_passphrase.txt )
+  ssh-keygen -t rsa -C "moorepants@gmail.com" -N $PASSPHRASE -f $HOME/.ssh/id_rsa
 fi
-cat ~/.ssh/id_rsa.pub
-echo "Please provide the above public ssh key to Github and press any key when done."
-read -n 1 -s
-git clone git@github.com:moorepants/bin.git ~/bin
-sudo apt-get install $(grep -vE "^\s*#" ~/bin/ubuntu-install-list.txt  | tr "\n" " ")
-mkdir -p ~/src
-if [ ! -d "~/src/dotfiles" ]; then
-  git clone git@github.com:moorepants/dotfiles.git ~/src/dotfiles
+
+# Upload the public key to Github.
+KEY=$( cat $HOME/.ssh/id_rsa.pub )
+JSON=$( printf '{"title": "%s", "key": "%s"}' "$TITLE" "$KEY" )
+TOKEN=$( cat github_token.txt )
+curl -s -d "$JSON" "https://api.github.com/user/keys?access_token=$TOKEN"
+
+# Download the scripts and install everything from the Ubuntu repositories.
+git clone git@github.com:moorepants/bin.git $HOME/bin
+sudo apt-get -y install $(grep -vE "^\s*#" $HOME/bin/ubuntu-install-list.txt  | tr "\n" " ")
+
+# Setup all the configuration files.
+mkdir -p $HOME/src
+if [ ! -d "$HOME/src/dotfiles" ]; then
+  git clone git@github.com:moorepants/dotfiles.git $HOME/src/dotfiles
 fi
 for config in .bashrc .vimrc .gitconfig
 do
-  if [ ! -f "~/$config" ]; then
-    rm ~/$config
-  ln -s ~/src/dotfiles/$config ~/$config
+  if [ -f "$HOME/$config" ]; then
+    rm $HOME/$config
   fi
+  ln -s $HOME/src/dotfiles/$config $HOME/$config
 done
-mkdir -p ~/.vim/after/ftplugin
-rm ~/.vim/after/ftplugin/*
+mkdir -p $HOME/.vim/after/ftplugin
+rm $HOME/.vim/after/ftplugin/*
 for plugin in cpp htmljinja html jinja matlab python rst r tex
 do
-  ln -s ~/src/dotfiles/$plugin.vim ~/.vim/after/ftplugin/$plugin.vim
+  ln -s $HOME/src/dotfiles/$plugin.vim $HOME/.vim/after/ftplugin/$plugin.vim
 done
-if [ ! -d "~/.vim/bundle/vundle" ]; then
-  git clone git@github.com:gmarik/vundle.git ~/.vim/bundle/vundle
+if [ ! -d "$HOME/.vim/bundle/vundle" ]; then
+  git clone git@github.com:gmarik/vundle.git $HOME/.vim/bundle/vundle
 fi
-hg clone https://bitbucket.org/pv/textext ~/src/textext/
-cp ~/src/textext/textext.py ~/.config/inkscape/extensions/
-cp ~/src/textext/textex.inx ~/.confing/inkscape/extensions/
-git clone git@github.com:mathjax/MathJax.git ~/src/MathJax
-git clone git@github.com:imakewebthings/deck.js.git ~/src/deck.js
-cd ~/Downloads
+hg clone https://bitbucket.org/pv/textext $HOME/src/textext/
+cp $HOME/src/textext/textext.py $HOME/.config/inkscape/extensions/
+cp $HOME/src/textext/textex.inx $HOME/.confing/inkscape/extensions/
+git clone git@github.com:mathjax/MathJax.git $HOME/src/MathJax
+git clone git@github.com:imakewebthings/deck.js.git $HOME/src/deck.js
+
+# Install miniconda and some base packages.
+cd $HOME/Downloads
 wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
 cd -
-bash ~/Downloads/Miniconda3-latest-Linux-x86_64.sh -b
-source ~/.bashrc
-conda install -y $(grep -vE "^\s*#" ~/bin/conda-install-list.txt  | tr "\n" " ")
+bash $HOME/Downloads/Miniconda3-latest-Linux-x86_64.sh -b
+source $HOME/.bashrc
+conda install -y $(grep -vE "^\s*#" $HOME/bin/conda-install-list.txt  | tr "\n" " ")
