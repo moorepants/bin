@@ -1,13 +1,14 @@
-garuda
-======
-
-Thinkpad X250 with Ubuntu 15.10
+garuda (Thinkpad X250)
+======================
 
 On startup press enter and the F1 to load bios config.
 
 Config > USB:
 
  - USB 3.0 Mode set to Auto
+
+If USB 3.0 is set to exclusively 3.0 it will fail to read my older USB sticks
+with the Ubuntu image.
 
 Config > Keyboard/Mouse
 
@@ -24,22 +25,53 @@ To install Ubuntu 15.10, restart with new bios settings, press enter on startup
 and then F12 for the boot device selection. Select the USB stick with the
 Ubuntu image. Then this will show up:
 
-   Missing paramtere in fconfiguration file. Keyword: path gfxboot.c32: not a
+   Missing parameter in configuration file. Keyword: path gfxboot.c32: not a
    COM32R image
 
 This is an Ubuntu bug. To get around it type "help" and press press enter. Then
 press enter on next screen and it will boot to USB.
 
-caramelmonkey
-=============
+caramelmonkey (ASUS U31SG)
+==========================
 
-ASUS u31sg
+In the software-properties-gtk gui select the nvidia driver in the proprietary
+drivers if you want the discrete graphics card to work.
+
 enable the nvidia driver and restart
 
 primeindcaotr lests you switch between graphics cards
 sudo add-apt-repository ppa:nilarimogard/webupd8
 sudo apt-get update
 sudo apt-get install prime-indicator
+
+HP 2170p
+========
+
+These are specific instructions for the HP Elitebook 2170p I use at work. The
+brightness controls (f9, f10, and system settings) did not work by default.
+
+To fix the brightness controls you must edit (sudo) the ``/etc/default/grub``
+file and add this argument to ``GRUB_CMDLINE_LINUX``::
+
+   GRUB_CMDLINE_LINUX="acpi_backlight=vendor"
+
+Then run::
+
+   $ sudo update-grub && shutdown -r now
+
+The the f9 and f10 keys work for changing brightness.
+
+ASUS EEEPc
+==========
+
+XMBC
+----
+
+sudo apt-get install python-software-properties pkg-config
+sudo apt-get install software-properties-common
+sudo add-apt-repository ppa:team-xbmc/ppa
+sudo apt-get update
+sudo apt-get install xbmc
 
 Asus UL30A
 ==========
@@ -60,6 +92,23 @@ of the onboard disk so that the computer boots to the USB drive.
 
 Install Ubuntu and set 60 gb for the primary root partition, 445 gb for the
 home directory, and the remainder ~5gb for swap (I have 4 gb of ram).
+
+Make the git subtree command work (only needed in Ubuntu 13.04, not 13.10)::
+
+   $ sudo chmod +x /usr/share/doc/git/contrib/subtree/git-subtree.sh
+   $ sudo ln -s /usr/share/doc/git/contrib/subtree/git-subtree.sh /usr/lib/git-core/git-subtree
+
+Wallpapers (note that this will show NSFW wallpapers without any config)::
+
+   $ sudo add-apt-repository ppa:peterlevi/ppa
+   $ sudo aptitude update
+   $ sudo aptitude install variety
+
+Sound switcher::
+
+   sudo apt-add-repository ppa:yktooo/ppa
+   sudo apt-get update
+   sudo apt-get install indicator-sound-switcher
 
 Ubuntu Settings
 ===============
@@ -95,36 +144,9 @@ Configure Git::
    $ git config --global user.email "moorepants@gmail.com"
    $ git config --global user.name "Jason K. Moore"
 
-Make the git subtree command work (only needed in Ubuntu 13.04, not 13.10)::
-
-   $ sudo chmod +x /usr/share/doc/git/contrib/subtree/git-subtree.sh
-   $ sudo ln -s /usr/share/doc/git/contrib/subtree/git-subtree.sh /usr/lib/git-core/git-subtree
-
-Add some nice things to ``~/.gitconfig``::
-
-   [color]
-       diff  = auto
-       status= auto
-       branch= auto
-       interactive = true
-
-   [alias]
-       ci = commit
-       di = diff --color-words
-       st = status
-       co = checkout
-       log1 = log --pretty=oneline --abbrev-commit
-       logs = log --stat
-
 Generate a ssh key::
 
    $ ssh-keygen -t rsa -C "moorepants@gmail.com"
-
-Hub::
-
-   $ git clone git@github.com:github/hub.git ~/src/hub
-   $ cd ~/src/hub
-   $ sudo rake1.9.1 install
 
 git-svn::
 
@@ -133,17 +155,6 @@ git-svn::
 git-annex::
 
    $ sudo aptitude install git-annex openssh-server
-
-Now that this machine is accessible via ssh, make it more secure by editing
-``/etc/ssh/sshd_config`` and restarting the ssh daemon.
-
-``PermitRootLogin without-password`` > ``PermitRootLogin no``
-
-``#PasswordAuthentication yes`` > ``PasswordAuthentication no``
-``UsePAM yes > ``UsePAM no``
-
-Note: I think the above screwed things up so now Git asks for the passphrase
-for my id_rsa file all the time now.
 
 Dot Files
 =========
@@ -155,6 +166,7 @@ Make symlinks to dot files::
 
    $ ln -s ~/src/dotfiles/bashrc ~/.bashrc
    $ ln -s ~/src/dotfiles/vimrc ~/.vimrc
+   $ ln -s ~/src/dotfiles/gitconfig ~/.gitconfig
    $ ln -s ~/src/dotfiles/html.vim ~/.vim/after/ftplugin/html.vim
    $ ln -s ~/src/dotfiles/matlab.vim ~/.vim/after/ftplugin/python.vim
    $ ln -s ~/src/dotfiles/tex.vim ~/.vim/after/ftplugin/tex.vim
@@ -180,6 +192,8 @@ Vundle::
 
    $ git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
 
+Run BundleInstall in vim.
+
 Software Development
 ====================
 
@@ -187,95 +201,24 @@ Software Development
 
    $ sudo aptitude install build-essential gfortran python-dev cmake cmake-curses-gui doxygen valgrind swig clang
 
-Switching between gcc and clang for C++:
+Switching between gcc and clang for C++::
 
-sudo update-alternatives --config c++
-
-Install pip::
-
-   $ sudo aptitude install pip
-
-Virtualenv::
-
-   $ sudo pip install virtualenv virtualenvwrapper
-   $ mkdir ~/envs
-
-Add this to bashrc::
-
-   # virtualenvwrapper
-   export WORKON_HOME=$HOME/envs
-   source /usr/local/bin/virtualenvwrapper.sh
-
-Numpydoc for Sphinx::
-
-   $ sudo pip install numpydoc
-
-Coverage::
-
-   $ sudo pip install coverage
-
-check-manifest::
-
-   $ sudo pip install check-manifest
-
-sake::
-
-   $ sudo pip install master-sake
-
-Python versions::
-
-   sudo add-apt-repository ppa:fkrull/deadsnakes
-   sudo apt-get update
-   sudo aptitude install python2.6
-
-Hipchat::
-
-   sudo su
-   echo "deb http://downloads.hipchat.com/linux/apt stable main" > \
-     /etc/apt/sources.list.d/atlassian-hipchat.list
-   wget -O - https://www.hipchat.com/keys/hipchat-linux.key | apt-key add -
-   apt-get update
-   apt-get install hipchat
-
-yaml-cpp::
-
-   sudo aptitude install libyaml-cpp0.5 libyaml-cpp-dev
-
-0.5 depends on Boost::
-
-   sudo aptitude install libboost-all-dev
-
-pypy::
-
-   sudo aptitude install pypy
-
-   sudo aptitude install qtcreator
+   $ sudo update-alternatives --config c++
 
 shellcheck::
 
    sudo aptitude install shellcheck
 
-coffeescript::
-
-   sudo aptitude install coffeescript
-
 General
 =======
 
-Download latest dropbox https://www.dropbox.com/install?os=lnx::
+Install Dropbox::
 
-$ wget https://www.dropbox.com/download?dl=packages/debian/dropbox_1.6.0_amd64.deb -O ~/Downloads/dropbox_1.6.0_amd64.deb
-$ dpkg -i ~/Downloads/dropbox_1.6.0_amd64.deb
+   $ sudo aptitude install dropbox
 
 Install KeePassX::
 
   $ sudo aptitude install keepassx
-
-To build hamster these are the deps::
-
-  $ sudo aptitude install git-core gettext intltool python-gconf python-xdg
-
-  $ sudo aptitude install gettext intltool python-gconf python-xdg gir1.2-gconf-2.0
 
 Install Hamster::
 
@@ -286,23 +229,17 @@ Add the hamster indicator to startup applications (found in dash)::
    name= "Hamster Indicator"
    command= "hamster-indicator"
 
-Link to the hmaster database::
+Link to the hamster database::
 
    ln -s ~/Dropbox/hamster.db ~/.local/share/hamster-applet/hamster.db`
 
-Install rememberthemilk
+Install rememberthemilk Firefox addon (or just sync firefox):
 
 http://www.rememberthemilk.com/services/gmail/addon/
 
 Go2::
 
    $ sudo aptitude install go2
-
-Add to ~/.bashrc::
-
-   # go2
-   [ -e /usr/lib/go2/go2.sh ] && source /usr/lib/go2/go2.sh
-   alias cd='go2 --cd' # caches all directorys you change to with cd
 
 Hibernate is not on by default. To see if hibernate works::
 
@@ -330,7 +267,7 @@ Random::
 
    $ sudo aptitude install gparted grsync colordiff chromium-browser
 
-Allows interaction with HFS+ filesystem (format option in gparted)::
+Allows interaction with Mac HFS+ filesystem (format option in gparted)::
 
    $ sudo apt-get install hfsprogs
 
@@ -345,8 +282,6 @@ Wine::
    $ sudo apitude update
    $ sudo aptitude install wine
 
-Applets
-
 CPU load and cpu frequency selection::
 
    $ sudo apt-get install indicator-multiload
@@ -355,44 +290,32 @@ CPU load and cpu frequency selection::
 See here for more stuff:
 http://www.webupd8.org/2013/10/8-things-to-do-after-installing-ubuntu.html
 
-Wallpapers:
-
-   $ sudo add-apt-repository ppa:peterlevi/ppa
-   $ sudo aptitude update
-   $ sudo aptitude install variety
+PDF editing::
 
    $ sudo aptitude install pdftk
 
 Battery life::
 
    sudo add-apt-repository ppa:linrunner/tlp
-   sudo apt-get update
-   sudo apt-get install tlp tlp-rdw
+   sudo aptitude update
+   sudo aptitude install tlp tlp-rdw
    sudo tlp start
-
-Sound switcher::
-
-   sudo apt-add-repository ppa:yktooo/ppa
-   sudo apt-get update
-   sudo apt-get install indicator-sound-switcher
-
-Samba::
-
-cifs-utils allows mounting shares from the command line.
-
-   sudo aptitude install cifs-utils
 
 Count Lines of Code (cloc)::
 
-   sudo aptitude install cloc
+   $ sudo aptitude install cloc
 
 linkchecker::
 
-   sudo aptitud install linkchecker
+   $ sudo aptitud install linkchecker
 
-Flash for Chromium:
+Flash for Chromium::
 
-   sudo aptitude install pepperflashplugin-nonfree
+   $ sudo aptitude install pepperflashplugin-nonfree
+
+Samba cifs-utils allows mounting shares from the command line::
+
+   $ sudo aptitude install cifs-utils
 
 Graphics
 ========
@@ -413,10 +336,6 @@ Get the textext_ extension too::
 
 .. _textext: http://pav.iki.fi/software/textext/
 
-Need these for building PIL::
-
-   $ sudo aptitude install libjpeg62-dev zlib1g-dev libfreetype6-dev liblcms1-dev
-
 Gexiv2::
 
    $ sudo aptitude install libexiv2-dev libtool libgirepository1.0-dev m4
@@ -430,35 +349,14 @@ After that you can use it in virtualenvs:
 
 http://stackoverflow.com/questions/17472124/how-to-install-gexiv2-on-a-virtualenv
 
-ffmpeg::
-
-   $ sudo aptitude install ffmpeg
-
-IPE::
+IPE vector drawing editor::
 
    $ sudo aptitude install ipe
 
 Communication
 =============
 
-Install gwibber (it is now technically friends app and gwibber will be going
-away)::
-
-   $ sudo aptitude install gwibber
-
-XChat::
-
-   $ sudo aptitude install xchat
-
-Add these favorite channels to xchat::
-
-#ipython,#plone,#pydy,#scipy,#matplotlib,#sympy
-
-Startup app for xchat:
-
-http://www.erickjohncuevas.com/how-tos/xchat-how-to-auto-connect-and-minimize-on-startup/
-
-install the google talk plugin http://www.google.com/intl/en/chat/voice/
+Install the google talk plugin in Firefox http://www.google.com/intl/en/chat/voice/
 
 Document Processing
 ===================
@@ -472,14 +370,6 @@ Sympy's uses xelatex to build it's docs.
 Pandoc::
 
    $ sudo aptitude install pandoc
-
-Pybtex::
-
-   $ sudo pip install pybtex
-
-Okular (this installs a bunch of KDE deps)::
-
-   $ sudo aptitude install okular
 
 Reference Management
 ====================
@@ -523,10 +413,6 @@ sudo chmod o+w /opt/zotero
 Web Development
 ===============
 
-::
-
-   $ sudo pip install fabric hyde
-
 MathJax
 
 git clone git://github.com/mathjax/MathJax.git ~/src/MathJax
@@ -554,25 +440,9 @@ I found a solution here: https://github.com/mitchellh/vagrant/issues/3227 ::
 
    echo insecure >> ~/.curlrc
 
-But this probably isn't a good solution.
+Docker::
 
-::
-   $ sudo pip install requests slumber pyyaml simplejson
-
-Node::
-
-sudo aptitude install nodejs npm phantomjs
-sudo npm install -g phantom-jasmine
-ln -s /usr/bin/nodejs /usr/bin/node
-# https://github.com/joyent/node/issues/3911
-sudo aptitude remove nodejs npm
-sudo add-apt-repository ppa:chris-lea/node.js
-sudo apt-get update
-sudo aptitude install nodejs npm
-
-Docker
-
-sudo aptitude install docker.io
+   $ sudo aptitude install docker.io
 
 BLAS/LAPACK
 ===========
@@ -597,111 +467,19 @@ http://stackoverflow.com/questions/11443302/compiling-numpy-with-openblas-integr
 SciPy Stack
 ===========
 
-IPython dependencies::
-
-   $ sudo aptitude install libzmq-dev libzmq1
-
-Install these from the package manager::
-
-   $ sudo aptitude install python-tables mayavi2 vitables
-
-Install from source::
-
-   $ sudo pip install cython # theano and pandas use to build
-   $ sudo pip install numpy scipy nose pandas theano sympy
-
 SymPy development (building docs) requires::
 
    $ sudo aptitude install librsvg2-bin
 
-IPython needs the ZMQ libs::
+Install miniconda
 
-   $ sudo aptitude install libzmq-dev libzmq1
-   $ sudo pip install ipython[notebook]
-
-Matplotlib has dependencies and should be installed after NumPy because it is
-not fully pip compatible::
-
-   $ sudo aptitude build-dep python-matplotlib
-   $ sudo pip install matplotlib
-
-Run the tests of all the packages::
-
-   $ python -c 'import numpy; numpy.test()'
-   $ python -c 'import matplotlib; matplotlib.test()'
-   $ python -c 'import scipy; scipy.test()'
-
-TODO: Add tests for all packages.
-
-I got this error though:
-
-ERROR: Failure: ImportError (/usr/local/lib/python2.7/dist-packages/scipy/lib/lapack/clapack.so: undefined symbol: clapack_sgesv)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "/usr/local/lib/python2.7/dist-packages/nose/loader.py", line 413, in loadTestsFromName
-    addr.filename, addr.module)
-  File "/usr/local/lib/python2.7/dist-packages/nose/importer.py", line 47, in importFromPath
-    return self.importFromDir(dir_path, fqname)
-  File "/usr/local/lib/python2.7/dist-packages/nose/importer.py", line 94, in importFromDir
-    mod = load_module(part_fqname, fh, filename, desc)
-  File "/usr/local/lib/python2.7/dist-packages/scipy/lib/lapack/__init__.py", line 162, in <module>
-    from . import clapack
-ImportError: /usr/local/lib/python2.7/dist-packages/scipy/lib/lapack/clapack.so: undefined symbol: clapack_sgesv
-
-So I found this: http://danielnouri.org/notes/2012/12/19/libblas-and-liblapack-issues-and-speed,-with-scipy-and-ubuntu/
-
-$ sudo update-alternatives --config libblas.so.3
-There are 2 choices for the alternative libblas.so.3 (providing /usr/lib/libblas.so.3).
-
-  Selection    Path                                    Priority   Status
-------------------------------------------------------------
-* 0            /usr/lib/atlas-base/atlas/libblas.so.3   35        auto mode
-  1            /usr/lib/atlas-base/atlas/libblas.so.3   35        manual mode
-  2            /usr/lib/libblas/libblas.so.3            10        manual mode
-
-Press enter to keep the current choice[*], or type selection number: 1
-
-$ sudo update-alternatives --config liblapack.so.3
-There are 2 choices for the alternative liblapack.so.3 (providing /usr/lib/liblapack.so.3).
-
-  Selection    Path                                      Priority   Status
-------------------------------------------------------------
-* 0            /usr/lib/lapack/liblapack.so.3             10        auto mode
-  1            /usr/lib/atlas-base/atlas/liblapack.so.3   5         manual mode
-  2            /usr/lib/lapack/liblapack.so.3             10        manual mode
-
-Press enter to keep the current choice[*], or type selection number: 2
-
-I still got the error so I changed to:
-
-$ sudo update-alternatives --config liblapack.so.3
-There are 2 choices for the alternative liblapack.so.3 (providing /usr/lib/liblapack.so.3).
-
-  Selection    Path                                      Priority   Status
-------------------------------------------------------------
-  0            /usr/lib/lapack/liblapack.so.3             10        auto mode
-  1            /usr/lib/atlas-base/atlas/liblapack.so.3   5         manual mode
-* 2            /usr/lib/lapack/liblapack.so.3             10        manual mode
-
-Press enter to keep the current choice[*], or type selection number: 1
-
-The tests passed at this point.
-
-Slycot
-======
-
-numpy, blas/lapack, gfortran are required
-
-git clone git@github.com:avventi/Slycot.git
-cd Slycot
-sudo python setup.py install
-
-python-control
-==============
-
-git svn -s http://svn.code.sf.net/p/python-control/code python-control
-cd python-control
-sudo python setup.py install
+wget https://repo.continuum.io/miniconda/Miniconda-latest-Linux-x86_64.sh
+bash Miniconda-latest-Linux-x86_64.sh -b
+export PATH=$HOME/miniconda/bin:$PATH
+# Adds the path prepend to bashrc
+echo "PATH=$HOME/miniconda/bin:$PATH" >> $HOME/.bashrc
+# Install all the Python dependencies
+conda install -y python=2.7 pip numpy scipy cython matplotlib pandas pytables ipython-notebook mpmath fastcache
 
 Matlab
 ======
@@ -723,29 +501,12 @@ Put this in bashrc because I rarely use the gui::
 
    alias matlab='matlab -nodesktop -nosplash'
 
-Anaconda
---------
-
-$ wget http://09c8d0b2229f813c1b93-c95ac804525aac4b6dba79b00b39d1d3.r79.cf1.rackcdn.com/Anaconda-1.8.0-Linux-x86_64.sh
-$ sudo bash Anaconda-1.8.0-Linux-x86_64.sh
-
-Choose the install directory to be ``/opt/anaconda``.
-
-Do not add the path statement to .bashrc.
-
-chrpath is required to build some packages:
-
-$ sudo aptitude install chrpath
-
 Octave
 ======
 
 sudo apt-add-repository ppa:octave/stable
 sudo apt-get update
-
 sudo aptitude install octave liboctave-dev
-
-sudo pip install oct2py
 
 To install from source, first get the dependencies::
 
@@ -923,7 +684,6 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:~/src/CoinIpopt/lib
 edit setup.py
 python setup.py install
 
-
 Plone
 =====
 
@@ -998,16 +758,9 @@ Adobe Reader
 Video
 =====
 
-Get libav for video editing.
+Get libav for video editing.::
 
-::
    $ sudo aptitude install libav-tools # for avconv
-
-SimpleScreenRecorder::
-
-   $ sudo add-apt-repository ppa:maarten-baert/simplescreenrecorder
-   $ sudo apt-get update
-   $ sudo apt-get install simplescreenrecorder
 
 youtube-dl::
 
@@ -1016,6 +769,12 @@ youtube-dl::
 OpenShot::
 
    $ sudo aptitude install openshot openshot-doc
+
+SimpleScreenRecorder::
+
+   $ sudo add-apt-repository ppa:maarten-baert/simplescreenrecorder
+   $ sudo apt-get update
+   $ sudo apt-get install simplescreenrecorder
 
 Simbody
 =======
@@ -1191,47 +950,3 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/opensim/lib
 export PATH=/opt/opensim/bin:$PATH
 
 Need to make the Opensim headers available.
-
-Old
-===
-
-Setup Conky
-
-https://help.ubuntu.com/community/SettingUpConky
-http://www.noobslab.com/2012/06/install-infinity-conky-in-ubuntulinux.html
-sudo apt-get install conky curl lm-sensors hddtemp
-sudo add-apt-repository ppa:noobslab/noobslab-conky
-sudo apt-get update
-sudo apt-get install infinity-conky
-
-# I'm removing infinity-conky it doesn't really seem to work well. It often has
-a grey back ground and if it doesn't it doesn't allow my icons on my desktop to
-show through.
-
-Logout and log back in then, open conky setup menu from the dash.
-
-XMBC
-====
-
-sudo apt-get install python-software-properties pkg-config
-sudo apt-get install software-properties-common
-sudo add-apt-repository ppa:team-xbmc/ppa
-sudo apt-get update
-sudo apt-get install xbmc
-
-HP 2170p
-========
-
-These are specific instructions for the HP Elitebook 2170p I use at work. The
-brightness controls (f9, f10, and system settings) did not work by default.
-
-To fix the brightness controls you must edit (sudo) the ``/etc/default/grub``
-file and add this argument to ``GRUB_CMDLINE_LINUX``::
-
-   GRUB_CMDLINE_LINUX="acpi_backlight=vendor"
-
-Then run::
-
-   $ sudo update-grub && shutdown -r now
-
-The the f9 and f10 keys work for changing brightness.

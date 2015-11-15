@@ -1,0 +1,12 @@
+pip
+numpy
+scipy
+cython
+matplotlib
+pandas
+pytables
+ipython-notebook
+mpmath
+fastcache
+sympy
+pydy
