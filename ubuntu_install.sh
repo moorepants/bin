@@ -22,10 +22,14 @@ curl -s -d "$JSON" "https://api.github.com/user/keys?access_token=$TOKEN"
 # Download the scripts and install everything from the Ubuntu repositories.
 git clone git@github.com:moorepants/bin.git $HOME/bin
 sudo apt-get -y install $(grep -vE "^\s*#" $HOME/bin/ubuntu-install-list.txt  | tr "\n" " ")
+
+# Install Dropbox manually.
 cd $HOME/Downloads
 wget https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_2015.10.28_amd64.deb -O dropbox_2015.10.28_amd64.deb
 sudo dpkg -i dropbox_2015.10.28_amd64.deb
 cd -
+
+# Install Chrome manually.
 cd $HOME/Downloads
 sudo apt-get install libxss1 libappindicator1 libindicator7
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
@@ -53,6 +57,8 @@ done
 if [ ! -d "$HOME/.vim/bundle/vundle" ]; then
   git clone git@github.com:gmarik/vundle.git $HOME/.vim/bundle/vundle
 fi
+
+# Install textext for Inkscape.
 if [ ! -d "$HOME/src/textext" ]; then
   hg clone https://bitbucket.org/pv/textext $HOME/src/textext
 fi
@@ -69,7 +75,5 @@ cd $HOME/Downloads
 wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
 cd -
 bash $HOME/Downloads/Miniconda3-latest-Linux-x86_64.sh -b
-# The following line doesn't work and conda is not in the path after calling
-# it.
-export PATH=$HOME/miniconda/bin:$PATH
+export PATH=$HOME/miniconda3/bin:$PATH
 conda install -y $(grep -vE "^\s*#" $HOME/bin/conda-install-list.txt  | tr "\n" " ")
