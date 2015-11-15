@@ -1,4 +1,6 @@
 aptitude
+tree
+htop
 git
 gitk
 subversion
@@ -50,3 +52,5 @@ libopenblas-base
 liblapack3
 octave
 liboctave-dev
+python-argcomplete
+pdftk

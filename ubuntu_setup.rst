@@ -1,21 +1,3 @@
-x250
-
-enter, f1
-change USB to 2.0 mode: disabled
-USB 3.0 seems to cause this when it tries to load from the liveusb
-(initramfs) Unable to find a medium containing a live file system
-
-Error parsing PCC subspaces from PCCT
-tpm_tis 00:05: A TPM error (6) occurred attempting to read a pcr
-
-enter, f12
-USB HDD Generic USB HDD
-Missing paramtere in fconfiguration file. Keyword: path gfxboot.c32: not a
-COM32R image
-type "help" press enter
-press enter on next screen
-it will boot to USB
-
 garuda
 ======
 
@@ -38,6 +20,16 @@ Security > Secure Boot
 
 Startup > UEFI/Legacy Boot: Legacy Only
 
+To install Ubuntu 15.10, restart with new bios settings, press enter on startup
+and then F12 for the boot device selection. Select the USB stick with the
+Ubuntu image. Then this will show up:
+
+   Missing paramtere in fconfiguration file. Keyword: path gfxboot.c32: not a
+   COM32R image
+
+This is an Ubuntu bug. To get around it type "help" and press press enter. Then
+press enter on next screen and it will boot to USB.
+
 caramelmonkey
 =============
 
@@ -49,8 +41,8 @@ sudo add-apt-repository ppa:nilarimogard/webupd8
 sudo apt-get update
 sudo apt-get install prime-indicator
 
-LiveUSB on Asus UL30A
-=====================
+Asus UL30A
+==========
 
 Download the Ubuntu 13.04 ISO::
 
@@ -77,6 +69,10 @@ nice background, enable hiding of dash, enable workspaces.
 
 Package Management
 ==================
+
+Set the server to the UCD server (if in Davis/Sacramento) using this gui::
+
+   $ sudo software-properties-gtk
 
 Get aptitude::
 
