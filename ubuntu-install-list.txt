@@ -70,3 +70,4 @@ openshot
 openshot-doc
 hamster-applet
 hamster-indicator
+keepassx
