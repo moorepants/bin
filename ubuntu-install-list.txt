@@ -56,7 +56,6 @@ octave
 liboctave-dev
 pdftk
 shellcheck
-dropbox
 hfsprogs
 wine
 cloc

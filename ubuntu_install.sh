@@ -12,6 +12,7 @@ if [ ! -f "$HOME/.ssh/id_rsa.pub" ]; then
 fi
 
 # Upload the public key to Github.
+TITLE=$( hostname )
 KEY=$( cat $HOME/.ssh/id_rsa.pub )
 JSON=$( printf '{"title": "%s", "key": "%s"}' "$TITLE" "$KEY" )
 TOKEN=$( cat github_token.txt )
@@ -20,6 +21,10 @@ curl -s -d "$JSON" "https://api.github.com/user/keys?access_token=$TOKEN"
 # Download the scripts and install everything from the Ubuntu repositories.
 git clone git@github.com:moorepants/bin.git $HOME/bin
 sudo apt-get -y install $(grep -vE "^\s*#" $HOME/bin/ubuntu-install-list.txt  | tr "\n" " ")
+cd $HOME/Downloads
+wget https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_2015.10.28_amd64.deb
+sudo dpkg -i dropbox_2015.10.28_amd64.deb
+cd -
 
 # Setup all the configuration files.
 mkdir -p $HOME/src
@@ -53,5 +58,7 @@ cd $HOME/Downloads
 wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
 cd -
 bash $HOME/Downloads/Miniconda3-latest-Linux-x86_64.sh -b
-source $HOME/.bashrc
+# The following line doesn't work and conda is not in the path after calling
+# it.
+export PATH=$HOME/miniconda/bin:$PATH
 conda install -y $(grep -vE "^\s*#" $HOME/bin/conda-install-list.txt  | tr "\n" " ")
