@@ -1,3 +1,54 @@
+x250
+
+enter, f1
+change USB to 2.0 mode: disabled
+USB 3.0 seems to cause this when it tries to load from the liveusb
+(initramfs) Unable to find a medium containing a live file system
+
+Error parsing PCC subspaces from PCCT
+tpm_tis 00:05: A TPM error (6) occurred attempting to read a pcr
+
+enter, f12
+USB HDD Generic USB HDD
+Missing paramtere in fconfiguration file. Keyword: path gfxboot.c32: not a
+COM32R image
+type "help" press enter
+press enter on next screen
+it will boot to USB
+
+garuda
+======
+
+Thinkpad X250 with Ubuntu 15.10
+
+On startup press enter and the F1 to load bios config.
+
+Config > USB:
+
+ - USB 3.0 Mode set to Auto
+
+Config > Keyboard/Mouse
+
+- F1-F12 as Primary Function: Enabled
+- Fn and Ctrl Key swap: Enabled
+
+Security > Secure Boot
+
+- Secure Boot : Disabled
+
+Startup > UEFI/Legacy Boot: Legacy Only
+
+caramelmonkey
+=============
+
+ASUS u31sg
+enable the nvidia driver and restart
+
+primeindcaotr lests you switch between graphics cards
+sudo add-apt-repository ppa:nilarimogard/webupd8
+sudo apt-get update
+sudo apt-get install prime-indicator
+
 LiveUSB on Asus UL30A
 =====================
 
@@ -227,6 +278,8 @@ Install KeePassX::
 To build hamster these are the deps::
 
   $ sudo aptitude install git-core gettext intltool python-gconf python-xdg
+
+  $ sudo aptitude install gettext intltool python-gconf python-xdg gir1.2-gconf-2.0
 
 Install Hamster::
 
