@@ -1,4 +1,6 @@
+setuptools
 pip
+argcomplete
 numpy
 scipy
 cython
@@ -9,4 +11,3 @@ ipython-notebook
 mpmath
 fastcache
 sympy
-pydy
