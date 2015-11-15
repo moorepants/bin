@@ -37,7 +37,7 @@ mkdir -p $HOME/src
 if [ ! -d "$HOME/src/dotfiles" ]; then
   git clone git@github.com:moorepants/dotfiles.git $HOME/src/dotfiles
 fi
-for config in bashrc vimrc gitconfig
+for config in bashrc vimrc gitconfig condarc
 do
   if [ -f "$HOME/.$config" ]; then
     rm $HOME/.$config
