@@ -23,6 +23,9 @@ curl -s -d "$JSON" "https://api.github.com/user/keys?access_token=$TOKEN"
 git clone git@github.com:moorepants/bin.git $HOME/bin
 sudo apt-get -y install $(grep -vE "^\s*#" $HOME/bin/ubuntu-install-list.txt  | tr "\n" " ")
 
+# Start the battery life software.
+sudo tlp start
+
 # Install Dropbox manually.
 cd $HOME/Downloads
 wget https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_2015.10.28_amd64.deb -O dropbox_2015.10.28_amd64.deb
@@ -50,7 +53,7 @@ do
 done
 mkdir -p $HOME/.vim/after/ftplugin
 rm $HOME/.vim/after/ftplugin/*
-for plugin in cpp htmljinja html jinja matlab python rst r tex
+for plugin in cpp htmljinja html jinja matlab python rst r tex javascript
 do
   ln -s $HOME/src/dotfiles/$plugin.vim $HOME/.vim/after/ftplugin/$plugin.vim
 done

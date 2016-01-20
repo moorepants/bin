@@ -71,3 +71,13 @@ openshot-doc
 hamster-applet
 hamster-indicator
 keepassx
+skype
+tlp
+tlp-rdw
+tp-smapi-dkms
+acpi-call-dkms
+bluez-tools
+xournal
+dvipng
+nodejs
+docbook2x

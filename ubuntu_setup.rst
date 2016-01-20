@@ -294,11 +294,20 @@ PDF editing::
 
    $ sudo aptitude install pdftk
 
-Battery life::
+Battery life
+
+Pre 15.10::
 
    sudo add-apt-repository ppa:linrunner/tlp
    sudo aptitude update
    sudo aptitude install tlp tlp-rdw
+
+Post 15.10 (extra packages are for thinkpads)::
+
+   sudo aptitude install tlp tlp-rdw tp-smapi-dkms acpi-call-dkms
+
+Start it::
+
    sudo tlp start
 
 Count Lines of Code (cloc)::
@@ -316,6 +325,10 @@ Flash for Chromium::
 Samba cifs-utils allows mounting shares from the command line::
 
    $ sudo aptitude install cifs-utils
+
+Bluetooth::
+
+   $ sudo aptitude install bluez-tools
 
 Graphics
 ========
