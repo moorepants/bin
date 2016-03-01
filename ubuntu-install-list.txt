@@ -81,3 +81,5 @@ xournal
 dvipng
 nodejs
 docbook2x
+arduino
+npm
