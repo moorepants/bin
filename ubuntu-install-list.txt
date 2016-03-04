@@ -83,3 +83,6 @@ nodejs
 docbook2x
 arduino
 npm
+libxss1
+libappindicator1
+libindicator7

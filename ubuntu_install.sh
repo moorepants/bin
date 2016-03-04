@@ -24,7 +24,9 @@ git clone git@github.com:moorepants/bin.git $HOME/bin
 sudo apt-get -y install $(grep -vE "^\s*#" $HOME/bin/ubuntu-install-list.txt  | tr "\n" " ")
 
 # Start the battery life software.
-sudo tlp start
+if [ "$( sudo dmidecode --string chassis-type )" = "Notebook" ]; then
+  sudo tlp start
+fi
 
 # Install Dropbox manually.
 cd $HOME/Downloads
@@ -34,7 +36,6 @@ cd -
 
 # Install Chrome manually.
 cd $HOME/Downloads
-sudo apt-get install libxss1 libappindicator1 libindicator7
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 sudo dpkg -i google-chrome*.deb
 cd -
@@ -77,6 +78,6 @@ git clone git@github.com:imakewebthings/deck.js.git $HOME/src/deck.js
 cd $HOME/Downloads
 wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
 cd -
-bash $HOME/Downloads/Miniconda3-latest-Linux-x86_64.sh -b
-export PATH=$HOME/miniconda3/bin:$PATH
+bash $HOME/Downloads/Miniconda3-latest-Linux-x86_64.sh -b -p $HOME/miniconda
+export PATH=$HOME/miniconda/bin:$PATH
 conda install -y $(grep -vE "^\s*#" $HOME/bin/conda-install-list.txt  | tr "\n" " ")
