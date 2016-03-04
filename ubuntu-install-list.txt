@@ -29,7 +29,6 @@ colordiff
 chromium-browser
 indicator-multiload
 indicator-cpufreq
-pepperflashplugin-nonfree
 gimp
 jhead
 imagemagick
