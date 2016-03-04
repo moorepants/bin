@@ -71,7 +71,6 @@ openshot-doc
 hamster-applet
 hamster-indicator
 keepassx
-skype
 tlp
 tlp-rdw
 tp-smapi-dkms
