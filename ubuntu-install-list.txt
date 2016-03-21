@@ -48,9 +48,13 @@ jabref
 virtualbox
 vagrant
 libblas3
+libblas-dev
 libatlas3-base
+libatlas-base-dev
 libopenblas-base
+libopenblas-dev
 liblapack3
+liblapack-dev
 octave
 liboctave-dev
 pdftk
