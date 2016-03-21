@@ -62,6 +62,8 @@ if [ ! -d "$HOME/.vim/bundle/vundle" ]; then
   git clone git@github.com:gmarik/vundle.git $HOME/.vim/bundle/vundle
 fi
 
+ln -s $HOME/bin/jupyter_custom.js $HOME/.jupyter/custom/custom.js
+
 # Install textext for Inkscape.
 if [ ! -d "$HOME/src/textext" ]; then
   hg clone https://bitbucket.org/pv/textext $HOME/src/textext
@@ -81,3 +83,4 @@ cd -
 bash $HOME/Downloads/Miniconda3-latest-Linux-x86_64.sh -b -p $HOME/miniconda
 export PATH=$HOME/miniconda/bin:$PATH
 conda install -y $(grep -vE "^\s*#" $HOME/bin/conda-install-list.txt  | tr "\n" " ")
+
