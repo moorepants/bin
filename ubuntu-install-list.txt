@@ -88,3 +88,4 @@ npm
 libxss1
 libappindicator1
 libindicator7
+vlc
