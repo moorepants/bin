@@ -91,3 +91,4 @@ libindicator7
 ccache
 nmap
 docker
+vlc
