@@ -90,3 +90,4 @@ libappindicator1
 libindicator7
 ccache
 nmap
+docker
