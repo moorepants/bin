@@ -83,4 +83,3 @@ cd -
 bash $HOME/Downloads/Miniconda3-latest-Linux-x86_64.sh -b -p $HOME/miniconda
 export PATH=$HOME/miniconda/bin:$PATH
 conda install -y $(grep -vE "^\s*#" $HOME/bin/conda-install-list.txt  | tr "\n" " ")
-
