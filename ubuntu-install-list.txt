@@ -92,3 +92,4 @@ ccache
 nmap
 docker
 vlc
+freecad
