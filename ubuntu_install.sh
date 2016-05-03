@@ -83,3 +83,8 @@ cd -
 bash $HOME/Downloads/Miniconda3-latest-Linux-x86_64.sh -b -p $HOME/miniconda
 export PATH=$HOME/miniconda/bin:$PATH
 conda install -y $(grep -vE "^\s*#" $HOME/bin/conda-install-list.txt  | tr "\n" " ")
+
+# Zotero
+wget https://raw.github.com/smathot/zotero_installer/master/zotero_installer.sh -O /tmp/zotero_installer.sh
+chmod +x /tmp/zotero_installer.sh
+/tmp/zotero_installer.sh
