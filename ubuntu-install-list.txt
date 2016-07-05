@@ -94,3 +94,4 @@ docker
 vlc
 freecad
 retext
+gir1.2-gexiv2-0.10
