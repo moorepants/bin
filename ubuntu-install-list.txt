@@ -88,4 +88,10 @@ npm
 libxss1
 libappindicator1
 libindicator7
+ccache
+nmap
+docker
 vlc
+freecad
+retext
+gir1.2-gexiv2-0.10

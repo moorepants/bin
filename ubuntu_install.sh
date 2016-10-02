@@ -62,6 +62,8 @@ if [ ! -d "$HOME/.vim/bundle/vundle" ]; then
   git clone git@github.com:gmarik/vundle.git $HOME/.vim/bundle/vundle
 fi
 
+ln -s $HOME/bin/jupyter_custom.js $HOME/.jupyter/custom/custom.js
+
 # Install textext for Inkscape.
 if [ ! -d "$HOME/src/textext" ]; then
   hg clone https://bitbucket.org/pv/textext $HOME/src/textext
@@ -81,3 +83,17 @@ cd -
 bash $HOME/Downloads/Miniconda3-latest-Linux-x86_64.sh -b -p $HOME/miniconda
 export PATH=$HOME/miniconda/bin:$PATH
 conda install -y $(grep -vE "^\s*#" $HOME/bin/conda-install-list.txt  | tr "\n" " ")
+
+# Zotero
+wget https://raw.github.com/smathot/zotero_installer/master/zotero_installer.sh -O /tmp/zotero_installer.sh
+chmod +x /tmp/zotero_installer.sh
+/tmp/zotero_installer.sh
+
+# Nuvola
+# TODO : UVER should only contain "xenial" (it contains xenial xerus with this
+# code)
+#UVER=$(grep $(lsb_release -rs) /usr/share/python-apt/templates/Ubuntu.info | grep -m 1 "Description: Ubuntu " | cut -d "'" -f2 | awk '{print tolower($0)}')
+#sudo "deb https://tiliado.eu/nuvolaplayer/repository/deb/ $UVER stable" >> /etc/apt/sources.list.d/tiliado-nuvolaplayer.list
+#sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 40554B8FA5FE6F6A
+#sudo aptitude update
+#sudo aptitude install nuvolaplayer3 nuvolaplayer3-all-services
