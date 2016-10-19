@@ -1,1 +1,1 @@
-Python.CodeCell.options_default.cm_config.autoCloseBrackets = false;
+IPython.CodeCell.options_default.cm_config.autoCloseBrackets = false;
