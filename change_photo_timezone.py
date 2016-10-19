@@ -4,6 +4,9 @@ Example use:
 
 python change_photo_timezone "America/Los_Angeles" "Africa/Nairobi" /home/dir1 /home/dir2
 
+Africa/Nairobi
+Asia/Phnom_Penh
+
 """
 
 import os
