@@ -88,6 +88,9 @@ conda install -y $(grep -vE "^\s*#" $HOME/bin/conda-install-list.txt  | tr "\n" 
 wget https://raw.github.com/smathot/zotero_installer/master/zotero_installer.sh -O /tmp/zotero_installer.sh
 chmod +x /tmp/zotero_installer.sh
 /tmp/zotero_installer.sh
+# the following line ensures that zotero can update itself when run by
+# moorepants
+sudo chown -R moorepants:moorepants /opt/zotero/
 
 # Nuvola
 # TODO : UVER should only contain "xenial" (it contains xenial xerus with this
