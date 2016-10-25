@@ -931,35 +931,35 @@ Install anyway::
    $ python3
    >>> import opensim
 
-Second time installing:
+Second time installing::
 
-conda create -n opensim numpy scipy ipython matplotlib
-sudo aptitude install cmake-gui g++-4.8 doxygen git openjdk-7-jdk python-dev swig
-mkdir ~/src/opensim
-cd ~/src/opensim
-git clone git@github.com:opensim-org/opensim-core.git
-cd opensim-core
-mkdir build
-cd build
-cmake \
-   -DCMAKE_INSTALL_PREFIX=~/opt/opensim \
-   -DCMAKE_BUILD_TYPE=Release \
-   -DBUILD_EXAMPLES=On \
-   -DBUILD_TESTING=On \
-   -DBUILD_JAVA_WRAPPING=Off \
-   -DBUILD_PYTHON_WRAPPING=On \
-   -DPYTHON_EXECUTABLE=/home/moorepants/anaconda/envs/opensim/bin \
-   -DPYTHON_INCLUDE_DIR=/home/moorepants/anaconda/envs/opensim/include/python2.7 \
-   -DPYTHON_LIBRARY=/home/moorepants/anaconda/envs/opensim/lib/libpython2.7.so \
-   -DSIMBODY_HOME=/usr/local \
+   conda create -n opensim numpy scipy ipython matplotlib
+   sudo aptitude install cmake-gui g++-4.8 doxygen git openjdk-7-jdk python-dev swig
+   mkdir ~/src/opensim
+   cd ~/src/opensim
+   git clone git@github.com:opensim-org/opensim-core.git
+   cd opensim-core
+   mkdir build
+   cd build
+   cmake \
+      -DCMAKE_INSTALL_PREFIX=~/opt/opensim \
+      -DCMAKE_BUILD_TYPE=Release \
+      -DBUILD_EXAMPLES=On \
+      -DBUILD_TESTING=On \
+      -DBUILD_JAVA_WRAPPING=Off \
+      -DBUILD_PYTHON_WRAPPING=On \
+      -DPYTHON_EXECUTABLE=/home/moorepants/anaconda/envs/opensim/bin \
+      -DPYTHON_INCLUDE_DIR=/home/moorepants/anaconda/envs/opensim/include/python2.7 \
+      -DPYTHON_LIBRARY=/home/moorepants/anaconda/envs/opensim/lib/libpython2.7.so \
+      -DSIMBODY_HOME=/usr/local \
    ..
 
-make doxygen
-make -j5
-ctest -j5
-sudo make -j5 install
+   make doxygen
+   make -j5
+   ctest -j5
+   sudo make -j5 install
 
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/opensim/lib
-export PATH=/opt/opensim/bin:$PATH
+   export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/opensim/lib
+   export PATH=/opt/opensim/bin:$PATH
 
 Need to make the Opensim headers available.
