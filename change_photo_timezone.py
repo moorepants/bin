@@ -14,7 +14,11 @@ import argparse
 from datetime import datetime
 
 import pytz
+import gi
+# prevents some warning message
+gi.require_version('GExiv2', '0.10')
 from gi.repository import GExiv2
+
 
 # The Canon PowerShot SX200 IS date format.
 # %H is a 24 hour clock
