@@ -1,0 +1,23 @@
+#!/bin/bash
+
+usage="$(basename "$0") [-h] command
+
+program to enable/disable the touchscreen
+
+where:
+    -h  show this help text
+    command either enable or disable"
+
+
+if [ "$1" == "-h" ] ; then
+	echo "$usage"
+	exit
+elif [ "$1" == "enable" ] || [ $1 == "disable" ] ; then
+	# the elan touchscreen on the Thinkpad X250 is id=9
+	xinput $1 9
+	echo "Touchscreen $1d"
+	exit
+else
+	echo "$1 is an invalid argument"
+	exit 1
+fi
