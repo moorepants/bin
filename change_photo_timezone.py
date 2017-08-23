@@ -6,6 +6,7 @@ python change_photo_timezone "America/Los_Angeles" "Africa/Nairobi" /home/dir1 /
 
 Africa/Nairobi
 Asia/Phnom_Penh
+America/New_York
 
 """
 
