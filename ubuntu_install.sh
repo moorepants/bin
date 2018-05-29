@@ -92,6 +92,12 @@ chmod +x /tmp/zotero_installer.sh
 # moorepants
 sudo chown -R moorepants:moorepants /opt/zotero/
 
+# heruko
+sudo add-apt-repository "deb https://cli-assets.heroku.com/branches/stable/apt ./"
+curl -L https://cli-assets.heroku.com/apt/release.key | sudo apt-key add -
+sudo apt-get update
+sudo apt-get install heroku
+
 # Nuvola
 # TODO : UVER should only contain "xenial" (it contains xenial xerus with this
 # code)
