@@ -43,6 +43,7 @@ texlive-xetex
 texlive-fonts-extra
 texlive-science
 texlive-humanities
+texlive-publishers
 pandoc
 jabref
 virtualbox
@@ -104,3 +105,5 @@ samba
 samba-client
 texlive-generic-extra
 biber
+latexmk
+screenfetch
