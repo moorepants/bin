@@ -1,4 +1,6 @@
 # First create a rsa_passphrase.txt and github_token.txt files.
+# rsa_passphrase.txt: a single line with a new passphrase for this computer
+# github_token.txt: the api token provided by your github account
 
 # Install git and curl as the two essential dependencies to this script.
 sudo apt-get -y install git curl
@@ -28,11 +30,10 @@ if [ "$( sudo dmidecode --string chassis-type )" = "Notebook" ]; then
   sudo tlp start
 fi
 
-# Install Dropbox manually.
-cd $HOME/Downloads
-wget https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_2015.10.28_amd64.deb -O dropbox_2015.10.28_amd64.deb
-sudo dpkg -i dropbox_2015.10.28_amd64.deb
-cd -
+# Install Nextcloud from their ppa
+sudo add-apt-repository ppa:nextcloud-devs/client
+sudo apt update
+sudo install nexcloud-client
 
 # Install Chrome manually.
 cd $HOME/Downloads
@@ -66,15 +67,11 @@ ln -s $HOME/bin/jupyter_custom.js $HOME/.jupyter/custom/custom.js
 
 # Install textext for Inkscape.
 if [ ! -d "$HOME/src/textext" ]; then
-  hg clone https://bitbucket.org/pv/textext $HOME/src/textext
+  git clone git@github.com:textext/textext.git $HOME/src/textext
 fi
 mkdir -p $HOME/.config/inkscape/extensions
 cp $HOME/src/textext/textext.py $HOME/.config/inkscape/extensions/
 cp $HOME/src/textext/textext.inx $HOME/.config/inkscape/extensions/
-
-# Install some source repos
-git clone git@github.com:mathjax/MathJax.git $HOME/src/MathJax
-git clone git@github.com:imakewebthings/deck.js.git $HOME/src/deck.js
 
 # Install miniconda and some base packages.
 cd $HOME/Downloads
