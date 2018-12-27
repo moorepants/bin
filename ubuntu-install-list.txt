@@ -20,6 +20,7 @@ doxygen
 dvipng
 exuberant-ctags
 freecad
+ffmpeg
 gfortran
 gimp
 gir1.2-gexiv2-0.10
@@ -48,7 +49,6 @@ latexmk
 libappindicator1
 libatlas3-base
 libatlas-base-dev
-libav-tools
 libblas3
 libblas-dev
 libindicator7
@@ -80,7 +80,6 @@ python-dev
 r-base
 retext
 samba
-samba-client
 screenfetch
 shellcheck
 shutter
@@ -104,6 +103,5 @@ valgrind
 vim-gtk
 virtualbox
 vlc
-wine
 xournal
 youtube-dl
