@@ -232,6 +232,7 @@ Add the hamster indicator to startup applications (found in dash)::
 Link to the hamster database::
 
    ln -s ~/Dropbox/hamster.db ~/.local/share/hamster-applet/hamster.db`
+   ln -s ~/Nextcloud/hamster.db ~/.local/share/hamster-applet/hamster.db`
 
 Install rememberthemilk Firefox addon (or just sync firefox):
 

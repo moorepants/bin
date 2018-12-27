@@ -70,7 +70,7 @@ if [ ! -d "$HOME/src/textext" ]; then
 fi
 mkdir -p $HOME/.config/inkscape/extensions
 cp $HOME/src/textext/textext.py $HOME/.config/inkscape/extensions/
-cp $HOME/src/textext/textex.inx $HOME/.confing/inkscape/extensions/
+cp $HOME/src/textext/textext.inx $HOME/.config/inkscape/extensions/
 
 # Install some source repos
 git clone git@github.com:mathjax/MathJax.git $HOME/src/MathJax
