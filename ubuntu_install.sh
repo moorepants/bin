@@ -97,12 +97,3 @@ sudo add-apt-repository "deb https://cli-assets.heroku.com/branches/stable/apt .
 curl -L https://cli-assets.heroku.com/apt/release.key | sudo apt-key add -
 sudo apt-get update
 sudo apt-get install heroku
-
-# Nuvola
-# TODO : UVER should only contain "xenial" (it contains xenial xerus with this
-# code)
-#UVER=$(grep $(lsb_release -rs) /usr/share/python-apt/templates/Ubuntu.info | grep -m 1 "Description: Ubuntu " | cut -d "'" -f2 | awk '{print tolower($0)}')
-#sudo "deb https://tiliado.eu/nuvolaplayer/repository/deb/ $UVER stable" >> /etc/apt/sources.list.d/tiliado-nuvolaplayer.list
-#sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 40554B8FA5FE6F6A
-#sudo aptitude update
-#sudo aptitude install nuvolaplayer3 nuvolaplayer3-all-services
