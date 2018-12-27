@@ -1,3 +1,9 @@
+# Note that this is still a manual process, the entire script is unlikely to
+# succeed.
+# 1. Download the bin zip file.
+# 2. Unzip it
+# 3. cd into it
+# 4. Create these files in the directory.
 # First create a rsa_passphrase.txt and github_token.txt files.
 # rsa_passphrase.txt: a single line with a new passphrase for this computer
 # github_token.txt: the api token provided by your github account
