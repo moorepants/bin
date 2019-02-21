@@ -3,7 +3,6 @@ aptitude
 arduino
 biber
 biber
-bluez-tools
 build-essential
 bzr
 ccache
@@ -74,6 +73,8 @@ pdftk
 php
 pstoedit
 python-dev
+python-argcomplete
+python-gobject
 r-base
 retext
 samba
