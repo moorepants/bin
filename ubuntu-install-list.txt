@@ -3,7 +3,6 @@ aptitude
 arduino
 biber
 biber
-bluez-tools
 build-essential
 bzr
 ccache
@@ -32,8 +31,6 @@ gnome-gmail
 go2
 gparted
 grsync
-hamster-applet
-hamster-indicator
 hfsprogs
 htop
 icedtea-plugin
@@ -61,7 +58,6 @@ librsvg2-bin
 libxss1
 linkchecker
 mercurial
-mypaint
 network-manager-vpnc
 network-manager-vpnc-gnome
 nmap
@@ -77,12 +73,13 @@ pdftk
 php
 pstoedit
 python-dev
+python-argcomplete
+python-gobject
 r-base
 retext
 samba
 screenfetch
 shellcheck
-shutter
 subversion
 subversion
 swig
