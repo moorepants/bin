@@ -9,10 +9,11 @@
 # github_token.txt: the api token provided by your github account
 
 # Install git and curl as the two essential dependencies to this script.
-sudo apt-get -y install git curl
+sudo apt -y install git curl
 git config --global user.email "moorepants@gmail.com"
 git config --global user.name "Jason K. Moore"
 git config --global core.editor "vim"
+# Create an public/private key for this user and computer.
 if [ ! -f "$HOME/.ssh/id_rsa.pub" ]; then
   mkdir -p $HOME/.ssh
   PASSPHRASE=$( cat rsa_passphrase.txt )
@@ -31,7 +32,7 @@ curl -s -d "$JSON" "https://api.github.com/user/keys?access_token=$TOKEN"
 git clone git@github.com:moorepants/bin.git $HOME/bin
 sudo apt-get -y install $(grep -vE "^\s*#" $HOME/bin/ubuntu-install-list.txt  | tr "\n" " ")
 
-# Start the battery life software.
+# Start the battery life software if on a laptop.
 if [ "$( sudo dmidecode --string chassis-type )" = "Notebook" ]; then
   sudo tlp start
 fi
@@ -69,6 +70,7 @@ if [ ! -d "$HOME/.vim/bundle/vundle" ]; then
   git clone git@github.com:gmarik/vundle.git $HOME/.vim/bundle/vundle
 fi
 
+mkdir -p $HOME/.jupyter/custom
 ln -s $HOME/bin/jupyter_custom.js $HOME/.jupyter/custom/custom.js
 
 # Install textext for Inkscape.
