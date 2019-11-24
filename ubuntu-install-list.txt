@@ -2,7 +2,6 @@ acpi-call-dkms
 aptitude
 arduino
 biber
-biber
 build-essential
 bzr
 ccache
@@ -80,7 +79,6 @@ retext
 samba
 screenfetch
 shellcheck
-subversion
 subversion
 swig
 texlive
