@@ -30,10 +30,16 @@ if [ "$( sudo dmidecode --string chassis-type )" = "Notebook" ]; then
   sudo tlp start
 fi
 
+if [ "$( hostname )" = "parvati"]; then
+  sudo apt-add-repository -y ppa:system76-dev/stable
+  sudo apt update
+  sudo apt install system76-driver
+fi
+
 # Install Nextcloud from their ppa
 sudo add-apt-repository ppa:nextcloud-devs/client
 sudo apt update
-sudo install nexcloud-client
+sudo apt install nextcloud-client
 
 # Install Chrome manually.
 cd $HOME/Downloads
@@ -66,6 +72,7 @@ fi
 ln -s $HOME/bin/jupyter_custom.js $HOME/.jupyter/custom/custom.js
 
 # Install textext for Inkscape.
+# TODO : doesn't work with this new repo
 if [ ! -d "$HOME/src/textext" ]; then
   git clone git@github.com:textext/textext.git $HOME/src/textext
 fi
