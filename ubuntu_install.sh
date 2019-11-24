@@ -42,6 +42,12 @@ sudo add-apt-repository ppa:nextcloud-devs/client
 sudo apt update
 sudo install nexcloud-client
 
+# Install Insync
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys ACCAF35C
+sudo echo "deb http://apt.insync.io/ubuntu bionic non-free contrib" > /etc/apt/sources.list.d/insync.list
+sudo apt update
+sudo apt install insync
+
 # Install Chrome manually.
 cd $HOME/Downloads
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
@@ -77,9 +83,10 @@ ln -s $HOME/bin/jupyter_custom.js $HOME/.jupyter/custom/custom.js
 if [ ! -d "$HOME/src/textext" ]; then
   git clone git@github.com:textext/textext.git $HOME/src/textext
 fi
-mkdir -p $HOME/.config/inkscape/extensions
-cp $HOME/src/textext/textext.py $HOME/.config/inkscape/extensions/
-cp $HOME/src/textext/textext.inx $HOME/.config/inkscape/extensions/
+cd $HOME/src/textext
+git checkout 0.9.1
+/usr/bin/python2 setup.py
+cd -
 
 # Install miniconda and some base packages.
 cd $HOME/Downloads
@@ -92,7 +99,8 @@ conda install -y $(grep -vE "^\s*#" $HOME/bin/conda-install-list.txt  | tr "\n" 
 # Zotero
 wget https://raw.github.com/smathot/zotero_installer/master/zotero_installer.sh -O /tmp/zotero_installer.sh
 chmod +x /tmp/zotero_installer.sh
-/tmp/zotero_installer.sh
+# NOTE : select global manually (this needs a command line flag)
+sudo /tmp/zotero_installer.sh
 # the following line ensures that zotero can update itself when run by
 # moorepants
 sudo chown -R moorepants:moorepants /opt/zotero/
@@ -100,5 +108,5 @@ sudo chown -R moorepants:moorepants /opt/zotero/
 # heruko
 sudo add-apt-repository "deb https://cli-assets.heroku.com/branches/stable/apt ./"
 curl -L https://cli-assets.heroku.com/apt/release.key | sudo apt-key add -
-sudo apt-get update
-sudo apt-get install heroku
+sudo apt update
+sudo apt install heroku
