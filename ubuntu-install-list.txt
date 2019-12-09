@@ -102,4 +102,5 @@ vim-gtk
 virtualbox
 vlc
 xournal
+xserver-xorg-input-synaptics
 youtube-dl
