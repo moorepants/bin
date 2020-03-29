@@ -17,7 +17,11 @@ docker.io
 doxygen
 dvipng
 exuberant-ctags
+<<<<<<< HEAD
+flameshot
 freecad
+=======
+>>>>>>> 44bcdb396c38e19958d5aebedcca995be579aa38
 ffmpeg
 freecad
 gfortran

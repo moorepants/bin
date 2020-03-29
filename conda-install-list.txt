@@ -1,6 +1,7 @@
 argcomplete
 cython
 fastcache
+ipython
 jupyter
 matplotlib
 mpmath
