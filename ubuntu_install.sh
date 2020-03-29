@@ -100,3 +100,9 @@ sudo add-apt-repository "deb https://cli-assets.heroku.com/branches/stable/apt .
 curl -L https://cli-assets.heroku.com/apt/release.key | sudo apt-key add -
 sudo apt-get update
 sudo apt-get install heroku
+
+cd $HOME/Downloads
+wget https://github.com/PCGen/pcgen/releases/download/6.06.01/pcgen-6.06.01-full.zip
+unzip pcgen-6.06.01-full.zip
+sudo cp -r pcgen /opt/pcgen
+cd -

@@ -18,6 +18,7 @@ docker.io
 doxygen
 dvipng
 exuberant-ctags
+flameshot
 freecad
 ffmpeg
 gfortran
