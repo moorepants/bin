@@ -2,6 +2,7 @@ acpi-call-dkms
 aptitude
 arduino
 biber
+blueman
 build-essential
 bzr
 ccache
