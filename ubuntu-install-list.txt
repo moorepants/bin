@@ -11,6 +11,7 @@ cloc
 cmake
 cmake-curses-gui
 colordiff
+compizconfig-settings-manager
 docbook2x
 docker
 docker.io
