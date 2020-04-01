@@ -4,8 +4,11 @@ fastcache
 ipython
 jupyter
 matplotlib
+mpmath
+notebook
 numpy
 pandas
+pip
 pytables
 scipy
 setuptools
