@@ -9,10 +9,11 @@
 # github_token.txt: the api token provided by your github account
 
 # Install git and curl as the two essential dependencies to this script.
-sudo apt-get -y install git curl
+sudo apt -y install git curl
 git config --global user.email "moorepants@gmail.com"
 git config --global user.name "Jason K. Moore"
 git config --global core.editor "vim"
+# Create an public/private key for this user and computer.
 if [ ! -f "$HOME/.ssh/id_rsa.pub" ]; then
   mkdir -p $HOME/.ssh
   PASSPHRASE=$( cat rsa_passphrase.txt )
@@ -31,7 +32,7 @@ curl -s -d "$JSON" "https://api.github.com/user/keys?access_token=$TOKEN"
 git clone git@github.com:moorepants/bin.git $HOME/bin
 sudo apt-get -y install $(grep -vE "^\s*#" $HOME/bin/ubuntu-install-list.txt  | tr "\n" " ")
 
-# Start the battery life software.
+# Start the battery life software if on a laptop.
 if [ "$( sudo dmidecode --string chassis-type )" = "Notebook" ]; then
   sudo tlp start
 fi
@@ -40,6 +41,12 @@ fi
 sudo add-apt-repository ppa:nextcloud-devs/client
 sudo apt update
 sudo install nexcloud-client
+
+# Install Insync
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys ACCAF35C
+sudo echo "deb http://apt.insync.io/ubuntu bionic non-free contrib" > /etc/apt/sources.list.d/insync.list
+sudo apt update
+sudo apt install insync
 
 # Install Chrome manually.
 cd $HOME/Downloads
@@ -69,15 +76,17 @@ if [ ! -d "$HOME/.vim/bundle/vundle" ]; then
   git clone git@github.com:gmarik/vundle.git $HOME/.vim/bundle/vundle
 fi
 
+mkdir -p $HOME/.jupyter/custom
 ln -s $HOME/bin/jupyter_custom.js $HOME/.jupyter/custom/custom.js
 
 # Install textext for Inkscape.
 if [ ! -d "$HOME/src/textext" ]; then
   git clone git@github.com:textext/textext.git $HOME/src/textext
 fi
-mkdir -p $HOME/.config/inkscape/extensions
-cp $HOME/src/textext/textext.py $HOME/.config/inkscape/extensions/
-cp $HOME/src/textext/textext.inx $HOME/.config/inkscape/extensions/
+cd $HOME/src/textext
+git checkout 0.9.1
+/usr/bin/python2 setup.py
+cd -
 
 # Install miniconda and some base packages.
 cd $HOME/Downloads
@@ -90,7 +99,8 @@ conda install -y $(grep -vE "^\s*#" $HOME/bin/conda-install-list.txt  | tr "\n" 
 # Zotero
 wget https://raw.github.com/smathot/zotero_installer/master/zotero_installer.sh -O /tmp/zotero_installer.sh
 chmod +x /tmp/zotero_installer.sh
-/tmp/zotero_installer.sh
+# NOTE : select global manually (this needs a command line flag)
+sudo /tmp/zotero_installer.sh
 # the following line ensures that zotero can update itself when run by
 # moorepants
 sudo chown -R moorepants:moorepants /opt/zotero/
@@ -100,3 +110,9 @@ sudo add-apt-repository "deb https://cli-assets.heroku.com/branches/stable/apt .
 curl -L https://cli-assets.heroku.com/apt/release.key | sudo apt-key add -
 sudo apt-get update
 sudo apt-get install heroku
+
+cd $HOME/Downloads
+wget https://github.com/PCGen/pcgen/releases/download/6.06.01/pcgen-6.06.01-full.zip
+unzip pcgen-6.06.01-full.zip
+sudo cp -r pcgen /opt/pcgen
+cd -

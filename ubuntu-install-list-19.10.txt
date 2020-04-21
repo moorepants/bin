@@ -2,7 +2,6 @@ acpi-call-dkms
 aptitude
 arduino
 biber
-blueman
 build-essential
 bzr
 ccache
@@ -12,14 +11,17 @@ cloc
 cmake
 cmake-curses-gui
 colordiff
-compizconfig-settings-manager
 docbook2x
 docker
 docker.io
 doxygen
 dvipng
 exuberant-ctags
+<<<<<<< HEAD
+flameshot
 freecad
+=======
+>>>>>>> 44bcdb396c38e19958d5aebedcca995be579aa38
 ffmpeg
 freecad
 gfortran
