@@ -1,0 +1,2 @@
+/moorepants/.zotero/
+/moorepants/.zsnes/
