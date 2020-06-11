@@ -10,9 +10,9 @@ IP=$(cat "sivaip.txt")
 PORT=$(cat "sivaport.txt")
 
 rsync -av -e "ssh -p $PORT" \ #  --delete \
-  --delete-excluded \
+  --delete-excluded \  # delete excluded files from destination directory
   --rsync-path /bin/rsync \
   --log-file "/home/rsync-backup.log" \
-  --include-from "/home/moorepants/bin/${HOSTNAME}-rsync-include.txt" \
-  --exclude-from "/home/moorepants/bin/${HOSTNAME}-rsync-exclude.txt" \
+  --include-from "$HOME/bin/${HOSTNAME}-rsync-include.txt" \
+  --exclude-from "$HOME/bin/${HOSTNAME}-rsync-exclude.txt" \
   /home/ moorepants@$IP:/var/services/homes/moorepants/backup/$HOSTNAME
