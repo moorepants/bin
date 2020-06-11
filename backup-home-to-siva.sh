@@ -6,11 +6,17 @@
 HOSTNAME=$(hostname)
 
 # Create two files adjacent to this script file with the IP and the port.
-IP=$(cat "sivaip.txt")
-PORT=$(cat "sivaport.txt")
+IP=$(cat "$HOME/bin/sivaip.txt")
+PORT=$(cat "$HOME/bin/sivaport.txt")
 
-rsync -av -e "ssh -p $PORT" \ #  --delete \
-  --delete-excluded \  # delete excluded files from destination directory
+echo $IP
+echo $PORT
+
+# --delete: delete files on destination that are not present on source
+# --delete-excluded: delete excluded files from destination directory
+# --rsync-path: path to rsync on destination server
+rsync -av -e "ssh -p $PORT" \
+  --delete-excluded \
   --rsync-path /bin/rsync \
   --log-file "/home/rsync-backup.log" \
   --include-from "$HOME/bin/${HOSTNAME}-rsync-include.txt" \
