@@ -74,6 +74,7 @@ pdf2svg
 php
 pstoedit
 python-argcomplete
+python3-argcomplete
 python-dev
 python-gobject
 python-gtk2
