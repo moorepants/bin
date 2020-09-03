@@ -1,5 +1,4 @@
 altair
-argcomplete
 asv
 bicycleparameters
 bokeh
@@ -36,7 +35,6 @@ jupyter_sphinx
 jupyterlab
 mamba
 matplotlib
-matplotlib-base
 mock
 mpmath
 nbconvert
@@ -48,7 +46,6 @@ notebook
 numba
 numexpr
 numpy
-numpy-stl
 numpydoc
 oct2py
 octave_kernel
@@ -71,10 +68,8 @@ pythreejs
 pytz
 pyyaml
 qtconsole
-quantities
 requests
 resonance
-ruamel_yaml
 scikit-image
 scikit-learn
 scipy
