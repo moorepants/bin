@@ -23,7 +23,7 @@ Notes for the tlbdk guide:
 export DEVICE=/nvme0p1 (this shoudl be the home partition)
 
 After running pam-auth-update I had to reboot, not just logout/login. Also make
-sure that all the things have * in the menu (use spacebar to add/remove the *).
+sure that all the things have `*` in the menu (use spacebar to add/remove the `*`).
 Then make sure to hit Ok with <Alt>-O (I think).
 
 sudo ~/go/src/github.com/google/fscrypt/bin/fscrypt setup /home
