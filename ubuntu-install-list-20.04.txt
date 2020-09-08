@@ -28,6 +28,7 @@ git
 git-annex
 git-svn
 gitk
+gnome-clocks
 gnome-gmail
 gnome-shell-extension-system-monitor
 gnome-shell-extension-weather
@@ -39,7 +40,6 @@ hfsprogs
 htop
 imagemagick
 indicator-cpufreq
-indicator-multiload
 inkscape
 ipe
 jabref
