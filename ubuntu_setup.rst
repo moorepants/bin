@@ -21,7 +21,9 @@ get the DisplayLink drivers working on Ubuntu.
 
 Once in BIOS settings look at Secure Boot>Secure Boot Enable
 
-Select to install optional software.
+In the BIOS disable the touchscreen.
+
+In Ubuntu install dialog Select to install optional software.
 
 Setup the partitions manually. Erase everything that was there.
 
@@ -31,7 +33,18 @@ Then a 50 GB EXT 4 and mount at /
 Then a 200 GB EXT4 and mount at /home
 Then a swap area with the remaining ~6GB.
 
+Terminal Bell
+-------------
+
+Turn off the terminal bell sound by going to Preferences in the terminal application and unchecking "Tereminal Bell". Read that here: https://vitux.com/how-to-mute-disable-hardware-beep-sound-in-ubuntu-terminal/
+
 sudo apt update && sudo apt upgrade
+
+Fn Keys
+-------
+
+Note that <Fn> + Esc lets you toggle whether the function keys are the default
+or the special keys, e.g. brightness.
 
 Docking Station
 ---------------
