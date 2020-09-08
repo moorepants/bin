@@ -29,12 +29,10 @@ git-annex
 git-svn
 gitk
 gnome-gmail
-go2
 gparted
 grsync
 hfsprogs
 htop
-icedtea-plugin
 imagemagick
 indicator-cpufreq
 indicator-multiload
@@ -57,7 +55,6 @@ libopenblas-base
 libopenblas-dev
 librsvg2-bin
 libxss1
-linkchecker
 mercurial
 network-manager-vpnc
 network-manager-vpnc-gnome
@@ -75,8 +72,6 @@ php
 pstoedit
 python-dev
 python-gobject
-python-gtk2
-python-gtksourceview2
 python3-argcomplete
 r-base
 retext
@@ -88,7 +83,6 @@ subversion
 swig
 texlive
 texlive-bibtex-extra
-texlive-generic-extra
 texlive-humanities
 texlive-publishers
 texlive-science
