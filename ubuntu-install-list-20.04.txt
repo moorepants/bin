@@ -29,6 +29,10 @@ git-annex
 git-svn
 gitk
 gnome-gmail
+gnome-shell-extension-system-monitor
+gnome-shell-extension-weather
+gnome-shell-extensions
+gnome-tweaks
 gparted
 grsync
 hfsprogs
