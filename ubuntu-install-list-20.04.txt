@@ -20,6 +20,7 @@ exuberant-ctags
 ffmpeg
 flameshot
 freecad
+fscrypt
 gfortran
 gimp
 gir1.2-gexiv2-0.10
@@ -60,6 +61,7 @@ linkchecker
 mercurial
 network-manager-vpnc
 network-manager-vpnc-gnome
+nextcloud-desktop
 nmap
 nodejs
 npm
