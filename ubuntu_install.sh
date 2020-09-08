@@ -22,6 +22,7 @@ fi
 
 # Upload the public key to Github.
 # If the key is already there, this fails gracefully.
+# Github now issues a warning that this API is being deprecated and some other way is needed.
 TITLE=$( hostname )
 KEY=$( cat $HOME/.ssh/id_rsa.pub )
 JSON=$( printf '{"title": "%s", "key": "%s"}' "$TITLE" "$KEY" )
@@ -30,17 +31,13 @@ curl -s -d "$JSON" "https://api.github.com/user/keys?access_token=$TOKEN"
 
 # Download the scripts and install everything from the Ubuntu repositories.
 git clone git@github.com:moorepants/bin.git $HOME/bin
-sudo apt-get -y install $(grep -vE "^\s*#" $HOME/bin/ubuntu-install-list.txt  | tr "\n" " ")
+UBUNTUVERSION=$(lsb_release -r -s)
+sudo apt-get -y install $(grep -vE "^\s*#" $HOME/bin/ubuntu-install-list-$UBUNTUVERSION.txt  | tr "\n" " ")
 
 # Start the battery life software if on a laptop.
 if [ "$( sudo dmidecode --string chassis-type )" = "Notebook" ]; then
   sudo tlp start
 fi
-
-# Install Nextcloud from their ppa
-sudo add-apt-repository ppa:nextcloud-devs/client
-sudo apt update
-sudo install nexcloud-client
 
 # Install Insync
 sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys ACCAF35C
@@ -58,6 +55,10 @@ cd -
 mkdir -p $HOME/src
 if [ ! -d "$HOME/src/dotfiles" ]; then
   git clone git@github.com:moorepants/dotfiles.git $HOME/src/dotfiles
+else
+  cd $HOME/src/dotfiles
+  git pull origin master
+  cd -
 fi
 for config in bashrc vimrc gitconfig condarc
 do
@@ -68,18 +69,23 @@ do
 done
 mkdir -p $HOME/.vim/after/ftplugin
 rm $HOME/.vim/after/ftplugin/*
-for plugin in cpp htmljinja html jinja matlab python rst r tex javascript
+for plugin in cpp html htmljinja javascript jinja matlab python r rst tex yaml
 do
   ln -s $HOME/src/dotfiles/$plugin.vim $HOME/.vim/after/ftplugin/$plugin.vim
 done
-if [ ! -d "$HOME/.vim/bundle/vundle" ]; then
-  git clone git@github.com:gmarik/vundle.git $HOME/.vim/bundle/vundle
+if [ ! -d "$HOME/.vim/bundle/Vundle.vim" ]; then
+  git clone git@github.com:VundleVim/Vundle.vim.git $HOME/.vim/bundle/Vundle.vim
 fi
 
 mkdir -p $HOME/.jupyter/custom
 ln -s $HOME/bin/jupyter_custom.js $HOME/.jupyter/custom/custom.js
 
 # Install textext for Inkscape.
+# TODO : Update this section. Inkscape 0.92 comes with Ubuntu 20.04. The new
+# textext author dropped support for Inkscape 0.92 after textext version 0.11.
+# But textext 0.11 (optionally requires) python-gtk2 and python-gtksourceview2
+# which are no longer available via apt. So this makes it a bit hard to install
+# textext on 20.04.
 if [ ! -d "$HOME/src/textext" ]; then
   git clone git@github.com:textext/textext.git $HOME/src/textext
 fi
@@ -90,20 +96,20 @@ cd -
 
 # Install miniconda and some base packages.
 cd $HOME/Downloads
-wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
+# Having trouble installing a consistent set of packages with Python 3.8
+#wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
+wget https://repo.anaconda.com/miniconda/Miniconda3-py37_4.8.3-Linux-x86_64.sh
 cd -
-bash $HOME/Downloads/Miniconda3-latest-Linux-x86_64.sh -b -p $HOME/miniconda
+#bash $HOME/Downloads/Miniconda3-latest-Linux-x86_64.sh -b -p $HOME/miniconda
+bash $HOME/Downloads/Miniconda3-py37_4.8.3-Linux-x86_64.sh -b -p $HOME/miniconda
 export PATH=$HOME/miniconda/bin:$PATH
 conda install -y $(grep -vE "^\s*#" $HOME/bin/conda-install-list.txt  | tr "\n" " ")
 
 # Zotero
-wget https://raw.github.com/smathot/zotero_installer/master/zotero_installer.sh -O /tmp/zotero_installer.sh
-chmod +x /tmp/zotero_installer.sh
-# NOTE : select global manually (this needs a command line flag)
-sudo /tmp/zotero_installer.sh
-# the following line ensures that zotero can update itself when run by
-# moorepants
-sudo chown -R moorepants:moorepants /opt/zotero/
+# https://github.com/retorquere/zotero-deb
+wget -qO- https://github.com/retorquere/zotero-deb/releases/download/apt-get/install.sh | sudo bash
+sudo apt update
+sudo apt install zotero
 
 # heruko
 sudo add-apt-repository "deb https://cli-assets.heroku.com/branches/stable/apt ./"
