@@ -2,7 +2,7 @@ acpi-call-dkms
 aptitude
 arduino
 biber
-bluetooth
+blueman
 build-essential
 bzr
 ccache
