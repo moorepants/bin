@@ -70,6 +70,7 @@ pyyaml
 qtconsole
 requests
 resonance
+restview
 scikit-image
 scikit-learn
 scipy
