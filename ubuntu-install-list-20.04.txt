@@ -87,7 +87,9 @@ subversion
 swig
 texlive
 texlive-bibtex-extra
+texlive-font-utils
 texlive-humanities
+texlive-lang-european
 texlive-publishers
 texlive-science
 texlive-xetex
@@ -101,6 +103,7 @@ valgrind
 vim-gtk
 virtualbox
 vlc
+vokoscreen
 xournal
 xserver-xorg-input-synaptics
 youtube-dl
