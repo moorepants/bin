@@ -1,0 +1,13 @@
+Have to do this to load the dvds from the isos during installation:
+
+https://www.mathworks.com/matlabcentral/answers/307353-why-am-i-unable-to-complete-installation-of-matlab-r2016b-when-installing-from-the-2-iso-images-i-do
+
+https://www.mathworks.com/matlabcentral/answers/361053-can-t-reload-usr-local-matlab-r2017b-bin-glnxa64-libmwdastudio-so
+https://bbs.archlinux.org/viewtopic.php?id=231299
+
+Had to move this file on Ubuntu 19.04 to allow simulink to load, as per above answers.
+
+cd /usr/local/MATLAB/R2018a/
+cd bin/glnxa64/
+sudo mkdir exclude
+sudo mv libfreetype.* exclude/
