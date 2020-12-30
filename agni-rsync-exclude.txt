@@ -1,0 +1,8 @@
+/lost+found/
+/moorepants/.*/
+/moorepants/Downloads/
+/moorepants/GOG Games/
+/moorepants/Public/
+/moorepants/Steam/
+/moorepants/miniconda/
+/moorepants/snap/
