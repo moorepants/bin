@@ -1,0 +1,6 @@
+/lost+found/
+/moorepants/.*/
+/moorepants/.local/share/Trash/
+/moorepants/Downloads/
+/moorepants/miniconda/
+/moorepants/snap/
