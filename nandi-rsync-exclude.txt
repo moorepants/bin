@@ -1,4 +1,5 @@
 /lost+found/
+/.fscrypt/
 /moorepants/.*/
 /moorepants/.local/share/Trash/
 /moorepants/Downloads/
