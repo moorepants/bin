@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # This will backup the home directory of this computer to the Synology Disk
 # Station.
