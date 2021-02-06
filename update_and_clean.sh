@@ -13,5 +13,9 @@ then
     $HOME/src/zoom-mgr/zoom-mgr.sh update  # update zoom
     cd -
 fi
-conda update --all
-conda clean --all
+# conda
+if [ -d "$HOME/miniconda" ]
+then
+    conda update --all
+    conda clean --all
+fi
