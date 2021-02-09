@@ -169,6 +169,13 @@ Install nextcloud::
 
 Open nextcloud desktop and connect to https://nextcloud.moorepants.info.
 
+The boot process stalls and it seems that there is not enough "entropy" to
+complete the boot. If you CTRL+ALT+F2 it'll move to tty2, login, and then
+CTRL+ALT+F1 to go back to tty1 and now there is enough entropy to boot to the
+graphical interface. I also installed haveged, which supposedly helps create
+enough entropy on boot and it seemed to fix things::
+
+   sudo apt install haveged
 
 garuda (Thinkpad X250)
 ======================

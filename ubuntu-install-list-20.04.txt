@@ -37,6 +37,7 @@ gnome-shell-extensions
 gnome-tweaks
 gparted
 grsync
+haveged
 hfsprogs
 htop
 imagemagick
