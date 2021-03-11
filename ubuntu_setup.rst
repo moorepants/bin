@@ -169,6 +169,9 @@ Install nextcloud::
 
 Open nextcloud desktop and connect to https://nextcloud.moorepants.info.
 
+Boot stalls (unfixed)
+---------------------
+
 The boot process stalls and it seems that there is not enough "entropy" to
 complete the boot. If you CTRL+ALT+F2 it'll move to tty2, login, and then
 CTRL+ALT+F1 to go back to tty1 and now there is enough entropy to boot to the
@@ -176,6 +179,19 @@ graphical interface. I also installed haveged, which supposedly helps create
 enough entropy on boot and it seemed to fix things::
 
    sudo apt install haveged
+
+Actually this `haveged` package doesn't seem to fix things. Maybe I needed to
+enable and start it::
+
+   sudo systemctl enable haveged
+   sudo systemctl start haveged
+
+Sound not working after reboot
+------------------------------
+
+I added a starup program with the command ``pulseaudio --start`` via the
+startup applications gui and this corrects things. Still not sure why this is
+needed.
 
 garuda (Thinkpad X250)
 ======================
