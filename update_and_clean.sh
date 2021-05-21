@@ -9,7 +9,7 @@ sudo apt -y clean
 if [ -d "$HOME/src/zoom-mgr" ]
 then
     cd $HOME/src/zoom-mgr
-    git pull origin master  # update the repository
+    git pull origin trunk  # update the repository
     $HOME/src/zoom-mgr/zoom-mgr.sh update  # update zoom
     cd -
 fi
