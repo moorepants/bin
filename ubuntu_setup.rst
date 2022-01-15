@@ -193,6 +193,16 @@ I added a starup program with the command ``pulseaudio --start`` via the
 startup applications gui and this corrects things. Still not sure why this is
 needed.
 
+Corrupted /dev/nvme0n1p2 (partition with ubuntu install)
+--------------------------------------------------------
+
+I opened my computer one morning and it would take me only to the Grub 2.0 screen with the grub> command prompt. Nothing would mount and boot. I eventually found out via a liveusb that the p2 partition had an error. Gparted reported that a superblock checksum did not match. I was not able to manually mount that partition. I finally came across:
+
+https://unix.stackexchange.com/questions/368594/cant-load-ubuntu-superblock-checksum-does-not-match-superblock-while-trying-to
+
+and I ran the fsck.ext4 -v /dev/nvme0n1p2 command and pressed "a" to give a yes to all questions. After that I could mount again. I rebooted and the computer worked. I ran update-grub incase that was needed and things seem fixed. Took a while to figure this out! Recorded here incase it happens a gain. Not sure why this happen. No particualry abnormal things were done on the computer the day before except for backing up to siva and deleted things from my trash folder.
+
+
 garuda (Thinkpad X250)
 ======================
 
