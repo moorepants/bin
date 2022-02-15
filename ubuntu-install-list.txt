@@ -37,8 +37,6 @@ hfsprogs
 htop
 icedtea-plugin
 imagemagick
-indicator-cpufreq
-indicator-multiload
 inkscape
 ipe
 jabref
