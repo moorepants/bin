@@ -83,6 +83,8 @@ https://wiki.archlinux.org/title/DisplayLink#Displays_disconnect_at_random_inter
       ### Automatically suspend sinks/sources that become idle for too long
       # load-module module-suspend-on-idle
 
+See also: https://www.displaylink.org/forum/showthread.php?p=91440
+
 Encrypt /home/moorepants
 ------------------------
 
