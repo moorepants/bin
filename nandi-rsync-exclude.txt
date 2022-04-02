@@ -5,3 +5,4 @@
 /moorepants/Downloads/
 /moorepants/miniconda/
 /moorepants/snap/
+/moorepants/GOG
