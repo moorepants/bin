@@ -47,6 +47,7 @@ ipe
 jabref
 jhead
 keepassx
+latexdiff
 latexmk
 libappindicator1
 libatlas-base-dev

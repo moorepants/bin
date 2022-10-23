@@ -6,3 +6,4 @@
 /moorepants/Steam/
 /moorepants/miniconda/
 /moorepants/snap/
+/moorepants/Android/

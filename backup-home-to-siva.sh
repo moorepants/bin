@@ -9,13 +9,15 @@ HOSTNAME=$(hostname)
 IP=$(cat "$HOME/bin/sivaip.txt")
 PORT=$(cat "$HOME/bin/sivaport.txt")
 
+echo $HOSTNAME
 echo $IP
 echo $PORT
+echo $HOME
 
 # --delete: delete files on destination that are not present on source
 # --delete-excluded: delete excluded files from destination directory
 # --rsync-path: path to rsync on destination server
-rsync -av -e "ssh -p $PORT" \
+sudo rsync -av -e "ssh -p $PORT" \
   --delete-excluded \
   --rsync-path /bin/rsync \
   --log-file "/home/rsync-backup.log" \

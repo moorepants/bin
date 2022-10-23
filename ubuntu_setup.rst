@@ -69,6 +69,22 @@ After rebooting and connecting the dock, the monitors work. Note that they will
 not work if the secure boot UEFI is enabled (found this out on first attempt to
 install).
 
+The docking station disconnects every hour or so. I've tried disabling the
+pulse audio module-suspend-on-idle module as described here:
+
+https://wiki.archlinux.org/title/DisplayLink#Displays_disconnect_at_random_intervals_when_using_the_Dell_D6000_docking_station
+
+   To disable loading of the module-suspend-on-idle module, comment out the
+   following line in the configuration file in use (~/.config/pulse/default.pa
+   or /etc/pulse/default.pa)::
+
+      /etc/pulse/default.pa
+
+      ### Automatically suspend sinks/sources that become idle for too long
+      # load-module module-suspend-on-idle
+
+See also: https://www.displaylink.org/forum/showthread.php?p=91440
+
 Encrypt /home/moorepants
 ------------------------
 
