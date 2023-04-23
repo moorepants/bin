@@ -17,5 +17,5 @@ echo $PORT
 # --rsync-path: path to rsync on destination server
 rsync -av -e "ssh -p $PORT" \
   --rsync-path /bin/rsync \
-  --log-file "/home/rsync-backup.log" \
-  /home/moorepants/Music/ moorepants@$IP:/var/services/music
+  --delete \
+  /home/moorepants/Music/ moorepants@$IP:/volume1/music
