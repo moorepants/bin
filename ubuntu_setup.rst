@@ -255,6 +255,13 @@ press enter on next screen and it will boot to USB.
 caramelmonkey (ASUS U31SG)
 ==========================
 
+To boot to USB, hold escape and the power on. Keep holding escape until a boot
+menu appears. Select the USB.
+
+Ubuntu 22.04 I selected the LVM encrypted option.
+
+Notes from original installation when the laptop was purchased:
+
 In the software-properties-gtk gui select the nvidia driver in the proprietary
 drivers if you want the discrete graphics card to work.
 
