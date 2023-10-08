@@ -1,10 +1,15 @@
+/*/lost+found/
 /.ecryptfs/
-/lost+found/
 /moorepants/.*/
-/moorepants/miniconda2/
-/moorepants/miniconda3/
-/moorepants/anaconda/
-/moorepants/Steam/
 /moorepants/Downloads/
 /moorepants/GOG Games/
 /moorepants/Public/
+/moorepants/R/
+/moorepants/Steam/
+/moorepants/Virtual Box VMs/
+/moorepants/anaconda/
+/moorepants/miniconda/
+/moorepants/miniconda2/
+/moorepants/miniconda3/
+/moorepants/perl5/
+/moorepants/snap/
