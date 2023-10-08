@@ -4,5 +4,7 @@
 /moorepants/.local/share/Trash/
 /moorepants/Downloads/
 /moorepants/miniconda/
+/moorepants/anaconda/
+/moorepants/anaconda3/
 /moorepants/snap/
 /moorepants/GOG

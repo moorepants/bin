@@ -33,6 +33,11 @@ Then a 50 GB EXT 4 and mount at /
 Then a 200 GB EXT4 and mount at /home
 Then a swap area with the remaining ~6GB.
 
+When I upgraded to Lunar Lobster 23.10, the upgrade would not complete due to
+some errors with the linux kernel having dependency issues with evdi (which
+is something this displaylink driver installs). I then uninstalled the display
+link driver and the kernel's would then install.
+
 Terminal Bell
 -------------
 
@@ -62,7 +67,7 @@ sudo ./(filename>.run
 reboot on prompt
 
 It tried to reboot but it hung on the Bios startup screen (says TU DElft in this case).
-Forced a shutdown with the poer button and started it back up.
+Forced a shutdown with the power button and started it back up.
 It booted to Ubuntu this time.
 
 After rebooting and connecting the dock, the monitors work. Note that they will
@@ -212,12 +217,20 @@ needed.
 Corrupted /dev/nvme0n1p2 (partition with ubuntu install)
 --------------------------------------------------------
 
-I opened my computer one morning and it would take me only to the Grub 2.0 screen with the grub> command prompt. Nothing would mount and boot. I eventually found out via a liveusb that the p2 partition had an error. Gparted reported that a superblock checksum did not match. I was not able to manually mount that partition. I finally came across:
+I opened my computer one morning and it would take me only to the Grub 2.0
+screen with the grub> command prompt. Nothing would mount and boot. I
+eventually found out via a liveusb that the p2 partition had an error. Gparted
+reported that a superblock checksum did not match. I was not able to manually
+mount that partition. I finally came across:
 
 https://unix.stackexchange.com/questions/368594/cant-load-ubuntu-superblock-checksum-does-not-match-superblock-while-trying-to
 
-and I ran the fsck.ext4 -v /dev/nvme0n1p2 command and pressed "a" to give a yes to all questions. After that I could mount again. I rebooted and the computer worked. I ran update-grub incase that was needed and things seem fixed. Took a while to figure this out! Recorded here incase it happens a gain. Not sure why this happen. No particualry abnormal things were done on the computer the day before except for backing up to siva and deleted things from my trash folder.
-
+and I ran the fsck.ext4 -v /dev/nvme0n1p2 command and pressed "a" to give a yes
+to all questions. After that I could mount again. I rebooted and the computer
+worked. I ran update-grub incase that was needed and things seem fixed. Took a
+while to figure this out! Recorded here incase it happens a gain. Not sure why
+this happen. No particualry abnormal things were done on the computer the day
+before except for backing up to siva and deleted things from my trash folder.
 
 garuda (Thinkpad X250)
 ======================
@@ -254,6 +267,13 @@ press enter on next screen and it will boot to USB.
 
 caramelmonkey (ASUS U31SG)
 ==========================
+
+To boot to USB, hold escape and the power on. Keep holding escape until a boot
+menu appears. Select the USB.
+
+Ubuntu 22.04 I selected the LVM encrypted option.
+
+Notes from original installation when the laptop was purchased:
 
 In the software-properties-gtk gui select the nvidia driver in the proprietary
 drivers if you want the discrete graphics card to work.

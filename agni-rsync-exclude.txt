@@ -5,4 +5,7 @@
 /moorepants/Public/
 /moorepants/Steam/
 /moorepants/miniconda/
+/moorepants/anaconda/
+/moorepants/anaconda3/
 /moorepants/snap/
+/moorepants/Android/

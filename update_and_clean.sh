@@ -6,12 +6,13 @@ sudo apt -y autoremove
 sudo apt -y autoclean
 sudo apt -y clean
 # zoom
-if [ -d "$HOME/src/zoom-mgr" ]
+# install deb-get with instructions here https://github.com/wimpysworld/deb-get
+if [ -d "/opt/zoom" ]
 then
-    cd $HOME/src/zoom-mgr
-    git pull origin trunk  # update the repository
-    $HOME/src/zoom-mgr/zoom-mgr.sh update  # update zoom
-    cd -
+  deb-get update
+  deb-get upgrade
+else
+  deb-get install zoom
 fi
 # conda
 if [ -d "$HOME/miniconda" ]
