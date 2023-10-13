@@ -8,3 +8,6 @@ LANG=C snap list --all | awk '/disabled/{print $1, $3}' |
     while read snapname revision; do
         snap remove "$snapname" --revision="$revision"
     done
+
+# clear the cache also
+rm -rf /var/lib/snapd/cache/*
