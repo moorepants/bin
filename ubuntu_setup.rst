@@ -178,6 +178,38 @@ And then ::
 
    sudo reboot
 
+At some point after installing Ubuntu 23.10 snap would no longer refresh with
+this kind of error for firefox and teams-for-linux::
+
+   moorepants@nandi:~$ sudo snap refresh
+   [sudo] password for moorepants: 
+   error: cannot perform the following tasks:
+   - Copy snap "teams-for-linux" data (cannot copy "/home/moorepants/snap/teams-for-linux/477" to "/home/moorepants/snap/teams-for-linux/498": failed to copy all: "cp: cannot create directory '/home/moorepants/snap/teams-for-linux/498': Required key not available" (1))
+
+I could not remove the snaps an reinstall either. I found some bugs like:
+
+https://bugs.launchpad.net/ubuntu/+source/snapd/+bug/1877764
+https://bugs.launchpad.net/ubuntu/+source/fscrypt/+bug/1867426
+
+which are a bit old, but seem to possibly be the issue. I did this suggestion
+https://github.com/google/fscrypt/pull/148#issue-494980873 which is to set
+`"use_fs_keyring_for_v1_policies": true` in `/etc/fscrypt.conf`.
+
+I set this but then at the ubuntu login screen after typing the password it
+would not allow login, just returned to the loging screen after pressing enter.
+
+I did this::
+
+   cd /home
+   mv moorepants/snap moorepants-snap
+   ln -s moorepants-snap moorepants/snap
+   sudo snap refresh
+
+and both snaps refreshed, but then firefox wouldn't open saying it couldn't
+create a directory /home/moorepants/snap. So I deleted the symlink and moved
+the snap directory back to the original location and the updated firefox
+opened.
+
 Software
 --------
 
