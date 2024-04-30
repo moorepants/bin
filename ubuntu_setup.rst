@@ -201,9 +201,11 @@ would not allow login, just returned to the loging screen after pressing enter.
 I did this::
 
    cd /home
-   mv moorepants/snap moorepants-snap
+   sudo mv moorepants/snap moorepants-snap
    ln -s moorepants-snap moorepants/snap
    sudo snap refresh
+   rm moorepants/snap
+   sudo mv moorepants-snap/ moorepants/snap
 
 and both snaps refreshed, but then firefox wouldn't open saying it couldn't
 create a directory /home/moorepants/snap. So I deleted the symlink and moved
