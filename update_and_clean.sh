@@ -20,7 +20,7 @@ fi
 sudo snap refresh
 sudo bash $HOME/bin/remove_old_snaps.sh
 # conda
-if [ -d "$HOME/miniconda" ]
+if [ -d "$HOME/miniconda" ] || [ -d"$HOME/miniconda3" ]
 then
     conda update --all
     conda clean --all
