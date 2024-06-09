@@ -1,3 +1,37 @@
+General
+=======
+
+``/etc/sysctl.conf``
+--------------------
+
+Insync adds these lines::
+
+   # added by Insync
+   fs.inotify.max_user_watches=1048576
+
+``/etc/systemd/journald.conf``
+------------------------------
+
+systemd creates gigabtyes of journal log files in /var/log/journal, so you can
+limit this by uncommenting::
+
+   SystemMaxUse=250M
+
+``/etc/ImageMagick-6/policy.xml``
+---------------------------------
+
+If you use image magic to convert pdfs it will refuse due to some security
+policy. You can disable this so the conversions occur::
+
+   <!-- disable ghostscript format types -->
+   <!-- See: https://askubuntu.com/questions/1081895/trouble-with-batch-conversion-of-png-to-pdf-using-convert -->
+   <!-- <policy domain="coder" rights="none" pattern="PS" /> -->
+   <!-- <policy domain="coder" rights="none" pattern="PS2" /> -->
+   <!-- <policy domain="coder" rights="none" pattern="PS3" /> -->
+   <!-- <policy domain="coder" rights="none" pattern="EPS" /> -->
+   <!-- <policy domain="coder" rights="none" pattern="PDF" /> -->
+   <!-- <policy domain="coder" rights="none" pattern="XPS" /> -->
+
 nandi (Dell Latitude 7300)
 ==========================
 
