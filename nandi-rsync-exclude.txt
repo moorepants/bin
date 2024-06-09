@@ -8,4 +8,6 @@
 /moorepants/anaconda/
 /moorepants/anaconda3/
 /moorepants/miniconda/
+/moorepants/miniconda3/
 /moorepants/snap/
+/moorepants/src/*.pyc
