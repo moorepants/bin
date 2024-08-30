@@ -338,6 +338,10 @@ Screen tearing
 
 Did this config: https://www.dedoimedo.com/computers/linux-intel-graphics-video-tearing.html
 
+But it didn't work. The only thing that worked was switching from X to Wayland.
+I found some info stating that X just can't be fixed. Wayland plays the videos
+cleanly with no tearing.
+
 caramelmonkey (ASUS U31SG)
 ==========================
 
