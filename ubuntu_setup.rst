@@ -333,6 +333,11 @@ Ubuntu image. Then this will show up:
 This is an Ubuntu bug. To get around it type "help" and press press enter. Then
 press enter on next screen and it will boot to USB.
 
+Screen tearing
+--------------
+
+Did this config: https://www.dedoimedo.com/computers/linux-intel-graphics-video-tearing.html
+
 caramelmonkey (ASUS U31SG)
 ==========================
 
