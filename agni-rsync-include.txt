@@ -1,3 +1,2 @@
 /moorepants/.local/share/
-/moorepants/.zotero/
 /moorepants/.zsnes/

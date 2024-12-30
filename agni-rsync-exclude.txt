@@ -1,11 +1,14 @@
 /lost+found/
 /moorepants/.*/
+/moorepants/Android/
+/moorepants/Data/baby-vibration-data/
 /moorepants/Downloads/
 /moorepants/GOG Games/
 /moorepants/Public/
 /moorepants/Steam/
-/moorepants/miniconda/
+/moorepants/Videos/movies/
+/moorepants/Videos/tv/
 /moorepants/anaconda/
 /moorepants/anaconda3/
+/moorepants/miniconda/
 /moorepants/snap/
-/moorepants/Android/
