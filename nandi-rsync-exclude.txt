@@ -3,6 +3,7 @@
 /moorepants-snap/
 /moorepants/.*/
 /moorepants/.local/share/Trash/
+/moorepants/Data/baby-vibration-data/
 /moorepants/Downloads/
 /moorepants/GOG
 /moorepants/anaconda/
