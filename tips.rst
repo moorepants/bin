@@ -24,3 +24,17 @@ Create a directory ``dreamobject-bucket`` and then mount with:
 .. code-block:: bash
 
    s3fs BUCKET_NAME dreamobject-bucket/ -o passwd_file=~/.passwd-s3fs -o url=https://objects-us-east-1.dream.io
+
+How to deal with Vim swp files
+==============================
+
+From: https://vim.fandom.com/wiki/Swap_file_%22...%22already_exists!_-_so_diff_it
+
+- `r # at the prompt hit "r" to recover the swap file`
+- `:sav! /tmp/%`
+- `:vs`
+- `:diffthis`
+- `CTRL-W_l`
+- `:bp`
+- `e # at the prompt hit "e" to edit anyway`
+- `:diffthis`
