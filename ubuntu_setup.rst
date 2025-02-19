@@ -124,6 +124,27 @@ https://wiki.archlinux.org/title/DisplayLink#Displays_disconnect_at_random_inter
 
 See also: https://www.displaylink.org/forum/showthread.php?p=91440
 
+When I updated to Ubuntu 24.10, the driver broke. I think I must have last
+installed it via their synaptic repo.
+
+sudo ./synaptic-debina-keyring.deb
+sudo apt update
+sudo apt install displaylink-dirver
+
+To uninstall first remove evdi
+sudo apt remove evdi dkms evdi-dkms displaylink-driver
+
+From https://askubuntu.com/questions/1480479/cant-install-synaptics-displaylink-driver-on-ubuntu-22-04
+
+sudo apt reinstall ./synaptics-repository-keyring.deb
+sudo apt install evdi-dkms
+sudo apt install displaylink-driver
+
+try https://askubuntu.com/questions/1530706/how-to-install-displaylink-driver-on-ubuntu-24-04-01-lts
+
+
+
+
 Encrypt /home/moorepants
 ------------------------
 
