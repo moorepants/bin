@@ -377,6 +377,9 @@ Ubuntu image. Then this will show up:
 This is an Ubuntu bug. To get around it type "help" and press press enter. Then
 press enter on next screen and it will boot to USB.
 
+If on Wayland typing stops working in steam and in software-properties-gtk. Not
+sure why.
+
 Screen tearing
 --------------
 
