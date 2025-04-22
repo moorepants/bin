@@ -32,6 +32,29 @@ policy. You can disable this so the conversions occur::
    <!-- <policy domain="coder" rights="none" pattern="PDF" /> -->
    <!-- <policy domain="coder" rights="none" pattern="XPS" /> -->
 
+Vim
+---
+
+Options for setting up Vim for Python:
+
+- [2025-04-16] https://github.com/dense-analysis/ale
+- [2024-12-24] https://github.com/sheerun/vim-polyglot: syntax highlighting (maybe indenting
+  too) for many languages (seems to use python-syntax)
+- [2024-12-16] https://github.com/ycm-core/YouCompleteMe: code completion, uses Jedi for
+  Python
+- [2023-10-04] https://github.com/nvie/vim-flake8
+- [2023-09-23] https://github.com/python-mode/python-mode
+- [2022-07-10, archived and recommends ALE] https://github.com/vim-syntastic/syntastic: syntax checker/fixer
+- [2020-12-14] https://github.com/vim-python/python-syntax: only does syntax
+  highlighting
+- [2013-11-18] python.vim https://www.vim.org/scripts/script.php?script_id=790:
+  seems to only do syntax highlighting
+- [2009-06-18] pythoncomplete https://www.vim.org/scripts/script.php?script_id=1542
+
+I've used python-mode for a long time but it is unmaintained and jedi-vim now
+sucks ass because it is so slow and can't present typed code in a reasonable
+fashion.
+
 nandi (Dell Latitude 7300)
 ==========================
 
