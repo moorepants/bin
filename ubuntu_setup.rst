@@ -67,6 +67,79 @@ policy. You can disable this so the conversions occur::
    <!-- <policy domain="coder" rights="none" pattern="PDF" /> -->
    <!-- <policy domain="coder" rights="none" pattern="XPS" /> -->
 
+Vim
+---
+
+I've used python-mode for a long time but it is unmaintained and jedi-vim now
+sucks ass because it is so slow and can't present typed code in a reasonable
+fashion. I also do not want to use a tool that relies on type hints for
+completion and linting.
+
+Options for setting up Vim for Python:
+
+https://www.vimfromscratch.com/articles/vim-for-python
+
+- [2025-02-26] https://github.com/girishji/vimcomplete
+
+   - Looks like a completion plugin that does not (necessarily) use jedi-vim!
+
+- [2025-04-16] https://github.com/dense-analysis/ale
+
+  - ALE does linting and then fixing lint errors as its main feature. It
+    connects to a large number of possible linters: https://github.com/dense-analysis/ale/blob/master/supported-tools.md
+  - ALE also does text completion by hooking into lanugage servers. It seems to
+    connect to deoplete https://github.com/Shougo/deoplete.nvim (archived). The
+    ALE source and deoplete both seem to indicate that they use Jedi for
+    completion or new type hint based tools like pyright/lance.
+
+- [2024-12-24] https://github.com/sheerun/vim-polyglot: syntax highlighting (maybe indenting
+  too) for many languages (seems to use python-syntax)
+
+   - Maybe I could use this and get rid of my complicated syntax highlighting,
+     indent, and line length files.
+   - Says it only implements syntax highlighting and indentation.
+   - Seems to use https://github.com/vim-python/python-syntax and
+     https://github.com/Vimjas/vim-python-pep8-indent for Python.
+
+- [2024-12-16] https://github.com/ycm-core/YouCompleteMe
+
+   - YouCompleteMe uses Jedi for Python so it suffers from the same problem as
+     jedi-vim in that it displays a bunch of mess instead of a single simple
+     function signature. If you disable the preview window, it is a bit more
+     usable than jedi-vim because the completion popups are a bit more
+     readable.
+   - Does not install simply with a plugin manager, manual compilation is
+     needed following the repo clone. Works fine.
+
+- [2023-10-04] https://github.com/nvie/vim-flake8
+
+  - I use this already via python-mode and desire to have it enabled, as I rely
+    on it a lot.
+
+- [2023-09-23] https://github.com/python-mode/python-mode
+
+   - Unmaintained, but still (mostly) works.
+   - Uses rope for completion, rope is maintained. (there is also this vim
+     plugin https://github.com/python-rope/ropevim)
+
+- [2022-07-10, archived and recommends ALE] https://github.com/vim-syntastic/syntastic
+
+  - syntax checker/fixer
+
+- [2020-03-20] https://github.com/Vimjas/vim-python-pep8-indent
+
+   - Bundled in python-mode (or a version of it).
+
+- [2020-12-14] https://github.com/vim-python/python-syntax:
+
+  - only does syntax highlighting
+
+- [2013-11-18] python.vim https://www.vim.org/scripts/script.php?script_id=790:
+
+  -  seems to only do syntax highlighting
+
+- [2009-06-18] pythoncomplete https://www.vim.org/scripts/script.php?script_id=1542
+
 nandi (Dell Latitude 7300)
 ==========================
 
