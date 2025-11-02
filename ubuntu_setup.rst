@@ -1,6 +1,41 @@
 General
 =======
 
+Flameshot with Wayland
+----------------------
+
+If you press "take screenshot" from the taskbar icon from flameshot it does
+nothing on Wayland. I followed the work around here:
+
+https://bugs.launchpad.net/ubuntu/+source/flameshot/+bug/2051248
+
+Create the file ``/usr/bin/launch-flameshot`` with the contents::
+
+   #!/usr/bin/env bash
+
+   bash -c -- "QT_QPA_PLATFORM=wayland flameshot"
+
+Set the permissions::
+
+   sudo chmod ugo+x /usr/bin/launch-flameshot
+
+Run this to create a overide settings file for the desktop icon::
+
+   desktop-file-install --dir=${HOME}/.local/share/applications --set-key=Exec --set-value="/usr/bin/launch-flameshot" /usr/share/applications/org.flameshot.Flameshot.desktop
+
+I also tried this (without the file in /usr/bin)::
+
+   desktop-file-install --dir=${HOME}/.local/share/applications --set-key=Exec --set-value="env QT_QPA_PLATFORM=wayland flameshot" /usr/share/applications/org.flameshot.Flameshot.desktop
+
+but it does not seem to work.
+
+Some urls that provided info:
+
+- https://discussion.fedoraproject.org/t/changing-exec-path-in-desktop-makes-launcher-disappear/75888
+- https://askubuntu.com/questions/1542578/how-to-get-flameshot-working-on-wayland-ubuntu
+- https://github.com/haydar/flameshot-ubuntu-wayland-fix: makes print screen
+  key open flameshot on wayland
+
 ``/etc/sysctl.conf``
 --------------------
 
