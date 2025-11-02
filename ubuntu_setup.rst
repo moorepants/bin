@@ -47,6 +47,14 @@ https://www.vimfromscratch.com/articles/vim-for-python
 - [2025-02-26] https://github.com/girishji/vimcomplete
 
    - Looks like a completion plugin that does not (necessarily) use jedi-vim!
+   - To get introspection based completion with a specific programming
+     language, this https://github.com/yegappan/lsp needs to be installed along
+     with language servers and lsp needs to be configured to source from the
+     language server. But the https://github.com/python-lsp/python-lsp-server
+     uses jedi by default.
+   - I configured lsp to use pylsp and it gives reasonable code completion
+     without displaying all the protocol function signatures. It doesn't remove
+     the type hints completely, so it is way more usuable than jedi-vim.
 
 - [2025-04-16] https://github.com/dense-analysis/ale
 
