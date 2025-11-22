@@ -20,8 +20,9 @@ fi
 sudo snap refresh
 sudo bash $HOME/bin/remove_old_snaps.sh
 # conda
-if [ -d "$HOME/miniconda" ] || [ -d"$HOME/miniconda3" ]
+if [[ -d "$HOME/miniconda" || -d "$HOME/miniconda3" || -d "$HOME/miniforge" || -d "$HOME/miniforge3" ]];
 then
+    echo "Found conda installation"
     conda update --all
     conda clean --all
 fi
