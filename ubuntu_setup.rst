@@ -36,6 +36,11 @@ Some urls that provided info:
 - https://github.com/haydar/flameshot-ubuntu-wayland-fix: makes print screen
   key open flameshot on wayland
 
+teams-for-linux fails to screen share if installed with snap when you are using
+wayland, so I switch to installing from the dev repo:
+
+https://teamsforlinux.de/
+
 ``/etc/sysctl.conf``
 --------------------
 
@@ -258,8 +263,12 @@ sudo apt install displaylink-driver
 
 try https://askubuntu.com/questions/1530706/how-to-install-displaylink-driver-on-ubuntu-24-04-01-lts
 
+WHen I updated to Ubuntu 25.10 the driver broke. So I did:
 
-
+sudo apt reinstall ~/Downloads/synaptics-repository-keyring.deb
+sudo apt install evdi-dkms
+sudo apt update
+sudo apt install displaylink-driver
 
 Encrypt /home/moorepants
 ------------------------
