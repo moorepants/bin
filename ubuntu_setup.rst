@@ -1,6 +1,14 @@
 General
 =======
 
+Printer: HP Color LaserJet MFP M281fdw
+
+sudo apt install hplip hplip-gui
+
+sudo hp-setup <local-printer-ip-address>
+
+Follow instructions in GUI.
+
 Flameshot with Wayland
 ----------------------
 
