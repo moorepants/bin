@@ -27,6 +27,4 @@ if [ -d "/opt/zoom" ]
 then
   deb-get update
   deb-get upgrade
-else
-  deb-get install zoom
 fi
