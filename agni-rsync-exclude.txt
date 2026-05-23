@@ -2,6 +2,7 @@
 /moorepants/.*/
 /moorepants/Android/
 /moorepants/Data/baby-vibration-data/
+/moorepants/Data/me41056/
 /moorepants/Downloads/
 /moorepants/GOG Games/
 /moorepants/Public/
@@ -12,5 +13,7 @@
 /moorepants/anaconda3/
 /moorepants/miniconda/
 /moorepants/miniconda3/
+/moorepants/miniforge/
+/moorepants/miniforge3/
 /moorepants/snap/
 /moorepants/src/*.pyc
